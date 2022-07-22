@@ -13,10 +13,20 @@
         </LinearGradientBrush>
     </Window.Background>
     <Grid>
-        <Image x:Name="image" Source="photo.JPG" HorizontalAlignment="Left" Height="Auto" Margin="10,10,10,10" VerticalAlignment="Top" Width="Auto" RenderTransformOrigin="0.5,0.5" MouseWheel="image_MouseWheel" Stretch="Fill" MouseMove="image_MouseMove_1" MouseLeftButtonDown="image_MouseLeftButtonDown">
+        <Image x:Name="image" Source="photo.JPG" HorizontalAlignment="Left" Height="Auto" Margin="10,10,10,10" VerticalAlignment="Top" Width="Auto" RenderTransformOrigin="0.5,0.5" MouseWheel="image_MouseWheel" Stretch="Fill" MouseMove="image_MouseMove_1" MouseLeftButtonDown="image_MouseLeftButtonDown" Cursor="Hand">
 
         </Image>
         <ListBox x:Name="listBox" HorizontalAlignment="Right" Height="400" Margin="10,10,10,10" VerticalAlignment="Top" Width="230">
+            <ListBoxItem x:Name="listBoxItem_0" Height="75" HorizontalAlignment="Stretch" Margin="5,0,0,5">
+                <ListBoxItem.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                        <GradientStop Color="Black"/>
+                        <GradientStop Color="#FF114C6F" Offset="1"/>
+                    </LinearGradientBrush>
+                </ListBoxItem.Background>
+            </ListBoxItem>
+            <Button x:Name="add_listBox_button" Content=" + ADD + " Height="75" Width="Auto" Margin="5,0,0,0"/>
+
             <TextBox x:Name="textBox" Height="63" TextWrapping="Wrap" Text="TextBox" Width="220" Background="Black" Foreground="White"/>
             <Button x:Name="center_button" Content="Center" Height="85" Width="87" Click="center_button_Click"/>
         </ListBox>

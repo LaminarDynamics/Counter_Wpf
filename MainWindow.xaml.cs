@@ -26,6 +26,9 @@ namespace Counter_Wpf
         private Point translate_amount;
         private Point mouse_pos;
 
+
+        private int index_of_items = 1;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -44,6 +47,9 @@ namespace Counter_Wpf
             // Sidebar scaling
             listBox.Height = screen_height * .95;
             listBox.Width = (screen_width - image.Width) * .94;
+
+            // Add button scaling
+            add_listBox_button.Width = listBox.Width * .95;
 
             // Slider scaling
             slider.Height = screen_height * .95;
@@ -118,6 +124,17 @@ namespace Counter_Wpf
             translate_amount.Y = 0;
             image_zoom = 1;
             ChangeTranslationAndZoom();
+        }
+
+        private void add_listBox_button_Click(object sender, RoutedEventArgs e)
+        {
+            ListBoxItem listBoxItem = new ListBoxItem();
+
+            listBoxItem.Name = "listBoxItemNumber" + index_of_items;
+            listBoxItem.HorizontalAlignment = HorizontalAlignment.Stretch;
+            listBoxItem.
+
+            listBox.Items.Add(listBox);
         }
     }
 }
