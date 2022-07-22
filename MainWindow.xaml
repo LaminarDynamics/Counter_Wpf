@@ -13,7 +13,7 @@
         </LinearGradientBrush>
     </Window.Background>
     <Grid>
-        <Image x:Name="image" Source="photo.JPG" HorizontalAlignment="Left" Height="Auto" Margin="10,10,10,10" VerticalAlignment="Top" Width="Auto" RenderTransformOrigin="0.5,0.5" MouseWheel="image_MouseWheel" Stretch="Fill" MouseMove="image_MouseMove_1" MouseLeftButtonDown="image_MouseLeftButtonDown" MouseLeftButtonUp="image_MouseLeftButtonUp">
+        <Image x:Name="image" Source="photo.JPG" HorizontalAlignment="Left" Height="Auto" Margin="10,10,10,10" VerticalAlignment="Top" Width="Auto" RenderTransformOrigin="0.5,0.5" MouseWheel="image_MouseWheel" Stretch="Fill" MouseMove="image_MouseMove_1" MouseLeftButtonDown="image_MouseLeftButtonDown">
 
         </Image>
         <ListBox x:Name="listBox" HorizontalAlignment="Right" Height="400" Margin="10,10,10,10" VerticalAlignment="Top" Width="230">
