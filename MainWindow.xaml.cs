@@ -111,9 +111,13 @@ namespace Counter_Wpf
             textBox.Text = "Start pos is: " + start.ToString();
         }
 
-        private void button_Click(object sender, RoutedEventArgs e)
+        // Center and unzoom photo
+        private void center_button_Click(object sender, RoutedEventArgs e)
         {
-
+            translate_amount.X = 0;
+            translate_amount.Y = 0;
+            image_zoom = 1;
+            ChangeTranslationAndZoom();
         }
     }
 }

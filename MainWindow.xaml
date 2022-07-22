@@ -18,7 +18,7 @@
         </Image>
         <ListBox x:Name="listBox" HorizontalAlignment="Right" Height="400" Margin="10,10,10,10" VerticalAlignment="Top" Width="230">
             <TextBox x:Name="textBox" Height="63" TextWrapping="Wrap" Text="TextBox" Width="220" Background="Black" Foreground="White"/>
-            <Button x:Name="button" Content="Button" Height="85" Width="87" Click="button_Click"/>
+            <Button x:Name="center_button" Content="Center" Height="85" Width="87" Click="center_button_Click"/>
         </ListBox>
         <Slider x:Name="slider" HorizontalAlignment="Center" Height="Auto" Margin="0,0,0,0" VerticalAlignment="Center" Width="15" RenderTransformOrigin="2.954,0.501" Orientation="Vertical" Background="#FF232323" Maximum="50" SmallChange="1" TickPlacement="TopLeft" Value="1" Cursor="Hand" ValueChanged="slider_ValueChanged" Minimum="1"/>
 
