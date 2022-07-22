@@ -62,8 +62,8 @@ namespace Counter_Wpf
             {
                 image_zoom -= zoom_speed;
             }
-            //ChangeZoom(image_zoom);
             ChangeTranslationAndZoom();
+            slider.Value = image_zoom;
         }
 
         private void ChangeTranslationAndZoom()
