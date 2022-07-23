@@ -154,22 +154,60 @@ namespace Counter_Wpf
         {
             string rect_name = "catagory" + index_of_catagories.ToString();
             index_of_catagories++;
-            
 
-            catagories.Children.Add(new Rectangle
+
+            var catagoryStack = new StackPanel
             {
-                Name = rect_name,
                 Height = 70,
-                Fill = new SolidColorBrush(Color.FromRgb(255, 255, 255)),
-                Stroke = new SolidColorBrush(Colors.Black),
                 Width = double.NaN, // Sets to auto
                 HorizontalAlignment = HorizontalAlignment.Stretch,
                 VerticalAlignment = VerticalAlignment.Top,
                 Margin = new Thickness(5, 2, 5, 5),
-                DataContext = index_of_catagories.ToString()
-            });
+                Background = new SolidColorBrush(Color.FromArgb(100, 35, 94, 130))
+            };
 
-            //MessageBox.Show("Name is: " + rect_name);
+
+            var rnd = new Random();
+            byte red = byte.Parse(rnd.Next(255).ToString());
+            byte green = byte.Parse(rnd.Next(255).ToString());
+            byte blue = byte.Parse(rnd.Next(255).ToString());
+
+
+
+            var circle = new Ellipse
+            {
+                Height = 50,
+                Width = 50,
+                Fill = new SolidColorBrush(Color.FromRgb(red, green, blue)),
+                HorizontalAlignment = HorizontalAlignment.Left,
+                VerticalAlignment = VerticalAlignment.Bottom,
+                Margin = new Thickness(10, 10, 0, 0),
+                
+            };
+           
+            catagoryStack.Children.Add(circle);
+
+            catagories.Children.Add(catagoryStack);
+            circle.VerticalAlignment = VerticalAlignment.Bottom;
+
+
+
+            //catagories.Children.Add(new Rectangle
+            //{
+            //    Name = rect_name,
+            //    Height = 70,
+            //    Fill = new SolidColorBrush(Color.FromRgb(255, 255, 255)),
+            //    Stroke = new SolidColorBrush(Colors.Black),
+            //    Width = double.NaN, // Sets to auto
+            //    HorizontalAlignment = HorizontalAlignment.Stretch,
+            //    VerticalAlignment = VerticalAlignment.Top,
+            //    Margin = new Thickness(5, 2, 5, 5),
+            //    DataContext = index_of_catagories.ToString()
+            //});
+
+            //var tool = new StackPanel();
+            //tool.Children.Add(new TextBlock() { Text = "mooooers" });
+
         }
     }
 }
