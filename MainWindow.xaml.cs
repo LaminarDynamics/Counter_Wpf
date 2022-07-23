@@ -45,15 +45,22 @@ namespace Counter_Wpf
             image.Width = screen_width * image_scale_width;
 
             // Sidebar scaling
-            listBox.Height = screen_height * .95;
-            listBox.Width = (screen_width - image.Width) * .94;
+            groupBox.Height = screen_height * .5;
+            groupBox.Width = (screen_width - image.Width) * .97;
 
             // Add button scaling
-            add_listBox_button.Width = listBox.Width * .95;
+            //add_listBox_button.Width = listBox.Width * .95;
 
             // Slider scaling
             slider.Height = screen_height * .95;
-            slider.Margin = new Thickness(image.Width - listBox.Width, 0, 0, 0);
+            slider.Margin = new Thickness(image.Width - groupBox.Width, 0, 0, 0);
+
+            // Scroller scaling
+            scrollViewer.Height = screen_height * .5;
+
+            // Bottom right grid scaling
+            bottom_right_grid.Height = (screen_height - scrollViewer.Height) * .9;
+            bottom_right_grid.Width = (screen_width - image.Width) * .97;
         }
 
         private void image_MouseWheel(object sender, MouseWheelEventArgs e)
@@ -92,7 +99,7 @@ namespace Counter_Wpf
         {
             // Used with left click to slide image
             mouse_pos = e.MouseDevice.GetPosition(image);
-            textBox.Text = mouse_pos.ToString();
+            //textBox.Text = mouse_pos.ToString();
 
             if (e.LeftButton == MouseButtonState.Pressed) // If moving while clicked
             {
@@ -103,7 +110,7 @@ namespace Counter_Wpf
                 // Append movement to translation amount
                 translate_amount.X += x_distance * -.5;
                 translate_amount.Y += y_distance * -.5;
-                textBox.Text = translate_amount.X.ToString() + "\n" + translate_amount.Y.ToString();
+                //textBox.Text = translate_amount.X.ToString() + "\n" + translate_amount.Y.ToString();
 
                 // Move image by translation amount
                 ChangeTranslationAndZoom();
@@ -114,7 +121,7 @@ namespace Counter_Wpf
         {
             // Important to get mouse start position for image translation to work
             start = e.MouseDevice.GetPosition(image);
-            textBox.Text = "Start pos is: " + start.ToString();
+            //textBox.Text = "Start pos is: " + start.ToString();
         }
 
         // Center and unzoom photo
@@ -132,9 +139,7 @@ namespace Counter_Wpf
 
             listBoxItem.Name = "listBoxItemNumber" + index_of_items;
             listBoxItem.HorizontalAlignment = HorizontalAlignment.Stretch;
-            listBoxItem.
-
-            listBox.Items.Add(listBox);
+          
         }
     }
 }
