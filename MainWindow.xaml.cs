@@ -178,7 +178,7 @@ namespace Counter_Wpf
             {
                 Height = 50,
                 Width = 50,
-                Fill = new SolidColorBrush(Color.FromRgb(red, green, blue)),
+                Fill = new SolidColorBrush(Color.FromArgb(255, red, green, blue)),
                 HorizontalAlignment = HorizontalAlignment.Left,
                 VerticalAlignment = VerticalAlignment.Bottom,
                 Margin = new Thickness(10, 10, 0, 0),
