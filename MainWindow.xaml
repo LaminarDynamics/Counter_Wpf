@@ -26,15 +26,14 @@
                 </LinearGradientBrush>
             </GroupBox.Background>
             <ScrollViewer x:Name="scrollViewer" Height="194" Margin="0,0,0,0" VerticalAlignment="Top" Width="Auto" HorizontalContentAlignment="Stretch">
-                <StackPanel>
-                    <Rectangle Fill="#FFF4F4F5" Height="70" Stroke="Black" Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="5,2,5,5"/>
-                    <Rectangle Fill="#FFF4F4F5" Height="70" Stroke="Black" Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="5,2,5,5"/>
-                    <Rectangle Fill="#FFF4F4F5" Height="70" Stroke="Black" Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="5,2,5,5"/>
-                    <Rectangle Fill="#FFF4F4F5" Height="70" Stroke="Black" Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="5,2,5,5"/>
-                    <Rectangle Fill="#FFF4F4F5" Height="70" Stroke="Black" Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="5,2,5,5"/>
-                    <Rectangle Fill="#FFF4F4F5" Height="70" Stroke="Black" Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="5,2,5,5"/>
+                <StackPanel x:Name="myStackPanel">
+                    <!--<Rectangle Fill="#FFF4F4F5" Height="70" Stroke="Black" Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="5,2,5,5"/>-->
+                    <!--<Button x:Name="addCatButton" Content="+ Add Catagory +" Height="70" Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="5,2,5,5" Click="addCatButton_Click"/>-->
+                    <StackPanel x:Name="catagories" VerticalAlignment="Bottom"></StackPanel>
+                    <Button x:Name="addCatButton" Content="+ Add Catagory +" Height="70" Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="5,2,5,5" Click="addCatButton_Click"/>
 
                 </StackPanel>
+                
             </ScrollViewer>
 
 
@@ -46,8 +45,12 @@
                     <GradientStop Color="#7F4600FF"/>
                 </LinearGradientBrush>
             </Grid.Background>
-            <GroupBox x:Name="fileControls" Header="File Stuff" HorizontalContentAlignment="Stretch" Height="Auto" Width="Auto" VerticalContentAlignment="Stretch"/>
+            <!--<GroupBox x:Name="fileControls" Header="File Stuff" HorizontalContentAlignment="Stretch" Height="Auto" Width="Auto" VerticalContentAlignment="Stretch">-->
+            <Button x:Name="button" Content="Button" HorizontalAlignment="Left" Height="24" Margin="24,10,0,0" VerticalAlignment="Top" Width="100" Click="button_Click"/>
+            <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="49" Margin="14,39,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="138"/>
+            <!--</GroupBox>-->
         </Grid>
+        <Button x:Name="centerButton" Content="Re-Center" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="75" Click="centerButton_Click" FontSize="14"/>
 
 
 

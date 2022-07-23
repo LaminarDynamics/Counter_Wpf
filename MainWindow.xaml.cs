@@ -27,7 +27,7 @@ namespace Counter_Wpf
         private Point mouse_pos;
 
 
-        private int index_of_items = 1;
+        private int index_of_catagories = 0;
 
         public MainWindow()
         {
@@ -99,7 +99,7 @@ namespace Counter_Wpf
         {
             // Used with left click to slide image
             mouse_pos = e.MouseDevice.GetPosition(image);
-            //textBox.Text = mouse_pos.ToString();
+            textBox.Text = mouse_pos.ToString();
 
             if (e.LeftButton == MouseButtonState.Pressed) // If moving while clicked
             {
@@ -121,11 +121,22 @@ namespace Counter_Wpf
         {
             // Important to get mouse start position for image translation to work
             start = e.MouseDevice.GetPosition(image);
-            //textBox.Text = "Start pos is: " + start.ToString();
+            textBox.Text = "Start pos is: " + start.ToString();
         }
 
+
+        private void add_listBox_button_Click(object sender, RoutedEventArgs e)
+        {
+            ListBoxItem listBoxItem = new ListBoxItem();
+
+            //listBoxItem.Name = "listBoxItemNumber" + index_of_items;
+            listBoxItem.HorizontalAlignment = HorizontalAlignment.Stretch;
+          
+        }
+
+
         // Center and unzoom photo
-        private void center_button_Click(object sender, RoutedEventArgs e)
+        private void centerButton_Click(object sender, RoutedEventArgs e)
         {
             translate_amount.X = 0;
             translate_amount.Y = 0;
@@ -133,13 +144,32 @@ namespace Counter_Wpf
             ChangeTranslationAndZoom();
         }
 
-        private void add_listBox_button_Click(object sender, RoutedEventArgs e)
+        private void button_Click(object sender, RoutedEventArgs e)
         {
-            ListBoxItem listBoxItem = new ListBoxItem();
+            
+            
+        }
 
-            listBoxItem.Name = "listBoxItemNumber" + index_of_items;
-            listBoxItem.HorizontalAlignment = HorizontalAlignment.Stretch;
-          
+        private void addCatButton_Click(object sender, RoutedEventArgs e)
+        {
+            string rect_name = "catagory" + index_of_catagories.ToString();
+            index_of_catagories++;
+            
+
+            catagories.Children.Add(new Rectangle
+            {
+                Name = rect_name,
+                Height = 70,
+                Fill = new SolidColorBrush(Color.FromRgb(255, 255, 255)),
+                Stroke = new SolidColorBrush(Colors.Black),
+                Width = double.NaN, // Sets to auto
+                HorizontalAlignment = HorizontalAlignment.Stretch,
+                VerticalAlignment = VerticalAlignment.Top,
+                Margin = new Thickness(5, 2, 5, 5),
+                DataContext = index_of_catagories.ToString()
+            });
+
+            //MessageBox.Show("Name is: " + rect_name);
         }
     }
 }
