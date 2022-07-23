@@ -42,14 +42,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Counter_Wpf.exe" size="3827696">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Counter_Wpf.exe" size="3831280">
       <assemblyIdentity name="Counter_Wpf" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>lqoeRHF83yUhf9aMkjA4PIHe8fDP/XS1aJ4KOQwj4tI=</dsig:DigestValue>
+        <dsig:DigestValue>B8h+8/7tTrHtXYK1/MSdl3n0biu9g/3FGFhFTB4GLOg=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

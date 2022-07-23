@@ -22,16 +22,24 @@ namespace Counter_Wpf
     {
         private double image_zoom = 1;
 
-        private Point start;   
+        private Point start;
         private Point translate_amount;
         private Point mouse_pos;
 
 
         private int index_of_catagories = 0;
+        private List<Catagories> ListOfCatagories = new List<Catagories>();
 
         public MainWindow()
         {
             InitializeComponent();
+
+            var dialog = new InfoDialog();
+            if (dialog.ShowDialog() == true)
+            {
+                MessageBox.Show("You said: " + dialog.ResponseText);
+                //https://stackoverflow.com/questions/2796470/wpf-create-a-dialog-prompt
+            }
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -39,7 +47,7 @@ namespace Counter_Wpf
             // Get screen size to dynamically size components
             double screen_width = SystemParameters.PrimaryScreenWidth;
             double screen_height = SystemParameters.PrimaryScreenHeight;
-      
+
             // Scale of main photo
             double image_scale_width = .75;
             image.Width = screen_width * image_scale_width;
@@ -131,7 +139,7 @@ namespace Counter_Wpf
 
             //listBoxItem.Name = "listBoxItemNumber" + index_of_items;
             listBoxItem.HorizontalAlignment = HorizontalAlignment.Stretch;
-          
+
         }
 
 
@@ -146,16 +154,16 @@ namespace Counter_Wpf
 
         private void button_Click(object sender, RoutedEventArgs e)
         {
-            
-            
+
+
         }
 
         private void addCatButton_Click(object sender, RoutedEventArgs e)
         {
-           
+
             index_of_catagories++;
 
-            
+
             var catagoryStack = new StackPanel
             {
                 Height = 70,
@@ -198,11 +206,11 @@ namespace Counter_Wpf
                 Name = "delete_" + index_of_catagories.ToString(),
             };
             delete_btn.Click += Delete_btn_Click;
-            
-            
+
+
 
             catagoryStack.Children.Add(delete_btn);
-            
+
 
 
 
@@ -240,8 +248,6 @@ namespace Counter_Wpf
             //catagories.Children.Remove(this);
             //Button btn = (Button)sender;
             //MessageBox.Show(btn.Name.ToString());
-            ColorDialog dlg = new ColorDialog();
-            dlg.ShowDialog();
 
             catagories.Children.RemoveAt(index);
         }

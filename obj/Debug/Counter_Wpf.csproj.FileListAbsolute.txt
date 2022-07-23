@@ -17,3 +17,5 @@ C:\Users\Owner-PC\Documents\AcerProgramProjects\ProgramProjects\C#_Projects\CS I
 C:\Users\Owner-PC\Documents\AcerProgramProjects\ProgramProjects\C#_Projects\CS Image\Counter_Thing\Dot_Counter_Wpf\Counter_Wpf\bin\Debug\Counter_Wpf.application
 C:\Users\Owner-PC\Documents\AcerProgramProjects\ProgramProjects\C#_Projects\CS Image\Counter_Thing\Dot_Counter_Wpf\Counter_Wpf\obj\Debug\Counter_Wpf.exe.manifest
 C:\Users\Owner-PC\Documents\AcerProgramProjects\ProgramProjects\C#_Projects\CS Image\Counter_Thing\Dot_Counter_Wpf\Counter_Wpf\obj\Debug\Counter_Wpf.application
+C:\Users\Owner-PC\Documents\AcerProgramProjects\ProgramProjects\C#_Projects\CS Image\Counter_Thing\Dot_Counter_Wpf\Counter_Wpf\obj\Debug\InfoDialog.g.cs
+C:\Users\Owner-PC\Documents\AcerProgramProjects\ProgramProjects\C#_Projects\CS Image\Counter_Thing\Dot_Counter_Wpf\Counter_Wpf\obj\Debug\InfoDialog.baml
