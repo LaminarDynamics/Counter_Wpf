@@ -152,10 +152,10 @@ namespace Counter_Wpf
 
         private void addCatButton_Click(object sender, RoutedEventArgs e)
         {
-            string rect_name = "catagory" + index_of_catagories.ToString();
+           
             index_of_catagories++;
 
-
+            
             var catagoryStack = new StackPanel
             {
                 Height = 70,
@@ -163,17 +163,16 @@ namespace Counter_Wpf
                 HorizontalAlignment = HorizontalAlignment.Stretch,
                 VerticalAlignment = VerticalAlignment.Top,
                 Margin = new Thickness(5, 2, 5, 5),
-                Background = new SolidColorBrush(Color.FromArgb(100, 35, 94, 130))
+                Background = new SolidColorBrush(Color.FromArgb(100, 35, 94, 130)),
+                Name = "catagory_" + index_of_catagories.ToString()
             };
 
 
+            // Color Circle Stuff
             var rnd = new Random();
             byte red = byte.Parse(rnd.Next(255).ToString());
             byte green = byte.Parse(rnd.Next(255).ToString());
             byte blue = byte.Parse(rnd.Next(255).ToString());
-
-
-
             var circle = new Ellipse
             {
                 Height = 50,
@@ -182,13 +181,32 @@ namespace Counter_Wpf
                 HorizontalAlignment = HorizontalAlignment.Left,
                 VerticalAlignment = VerticalAlignment.Bottom,
                 Margin = new Thickness(10, 10, 0, 0),
-                
             };
-           
             catagoryStack.Children.Add(circle);
 
+
+            // Delete Button
+            var delete_btn = new Button
+            {
+                Height = 50,
+                Width = 50,
+                Background = new SolidColorBrush(Colors.Red),
+                HorizontalAlignment = HorizontalAlignment.Right,
+                VerticalAlignment = VerticalAlignment.Top,
+                Margin = new Thickness(0, -50, 10, 0),
+                Content = "X",
+                Name = "delete_" + index_of_catagories.ToString(),
+            };
+            delete_btn.Click += Delete_btn_Click;
+            
+            
+
+            catagoryStack.Children.Add(delete_btn);
+            
+
+
+
             catagories.Children.Add(catagoryStack);
-            circle.VerticalAlignment = VerticalAlignment.Bottom;
 
 
 
@@ -209,5 +227,25 @@ namespace Counter_Wpf
             //tool.Children.Add(new TextBlock() { Text = "mooooers" });
 
         }
+
+        private void Delete_btn_Click(object sender, RoutedEventArgs e)
+        {
+            // Get index
+            Button btn = (Button)sender;
+            string ident = btn.Name;
+
+            string[] ident_parts = ident.Split(char.Parse("_"));
+            int index = int.Parse(ident_parts[1]);
+
+            //catagories.Children.Remove(this);
+            //Button btn = (Button)sender;
+            //MessageBox.Show(btn.Name.ToString());
+            ColorDialog dlg = new ColorDialog();
+            dlg.ShowDialog();
+
+            catagories.Children.RemoveAt(index);
+        }
+
+
     }
 }
