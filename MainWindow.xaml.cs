@@ -23,12 +23,8 @@ namespace Counter_Wpf
         private double image_zoom = 1;
 
         private Point start;
-        private Point translate_amount;
+        private Point canvas_translate_amount;
         private Point mouse_pos;
-
-        // Get screen size to dynamically size components
-        double screen_width = SystemParameters.PrimaryScreenWidth;
-        double screen_height = SystemParameters.PrimaryScreenHeight;
 
 
         private int index_of_catagories = 0;
@@ -45,24 +41,28 @@ namespace Counter_Wpf
             double screen_width = SystemParameters.PrimaryScreenWidth;
             double screen_height = SystemParameters.PrimaryScreenHeight;
 
-            // Scale of main photo
-            double image_scale_width = .75;
-            image.Width = screen_width * image_scale_width;
+            // Scale canvas
+            double canvas_scale_width = .75;
+            myCanvas.Width = screen_width * canvas_scale_width;
 
             // Sidebar scaling
             groupBox.Height = screen_height * .5;
-            groupBox.Width = (screen_width - image.Width) * .97;
+            groupBox.Width = (screen_width - myCanvas.Width) * .97;
 
             // Slider scaling
             slider.Height = screen_height * .95;
-            slider.Margin = new Thickness(image.Width - groupBox.Width, 0, 0, 0);
+            slider.Margin = new Thickness(myCanvas.Width - groupBox.Width, 0, 0, 0);
 
             // Scroller scaling
             scrollViewer.Height = screen_height * .5;
 
             // Bottom right grid scaling
             bottom_right_grid.Height = (screen_height - scrollViewer.Height) * .9;
-            bottom_right_grid.Width = (screen_width - image.Width) * .97;
+            bottom_right_grid.Width = (screen_width - myCanvas.Width) * .97;
+
+            // Scale Image to fit canvas
+            image.Width = myCanvas.Width;
+            image.Height = myCanvas.Height;
         }
 
         private void image_MouseWheel(object sender, MouseWheelEventArgs e) // Mousewheel Zoom
@@ -83,11 +83,11 @@ namespace Counter_Wpf
 
         private void ChangeTranslationAndZoom() // Translation/Zoom logic implementation
         {
-            // Move image by translation amount
-            Matrix X = new Matrix();
-            X.Translate(translate_amount.X, translate_amount.Y);
-            X.Scale(image_zoom, image_zoom);
-            image.RenderTransform = new MatrixTransform(X);
+            // Move image/canvas by translation/zoom amount
+            Matrix translation = new Matrix();
+            translation.Translate(canvas_translate_amount.X, canvas_translate_amount.Y);
+            translation.Scale(image_zoom, image_zoom);
+            myCanvas.RenderTransform = new MatrixTransform(translation);
         }
 
         private void slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)   // Slider Controls
@@ -109,10 +109,9 @@ namespace Counter_Wpf
                 double x_distance = start.X - mouse_pos.X;
                 double y_distance = start.Y - mouse_pos.Y;
 
-                // Append movement to translation amount
-                translate_amount.X += x_distance * -.5;
-                translate_amount.Y += y_distance * -.5;
-                //textBox.Text = translate_amount.X.ToString() + "\n" + translate_amount.Y.ToString();
+                // Canvas translation amount
+                canvas_translate_amount.X += x_distance * -.1;
+                canvas_translate_amount.Y += y_distance * -.1;
 
                 // Move image by translation amount
                 ChangeTranslationAndZoom();
@@ -129,8 +128,8 @@ namespace Counter_Wpf
         // Center and unzoom photo
         private void centerButton_Click(object sender, RoutedEventArgs e)
         {
-            translate_amount.X = 0;
-            translate_amount.Y = 0;
+            canvas_translate_amount.X = 0;
+            canvas_translate_amount.Y = 0;
             image_zoom = 1;
             ChangeTranslationAndZoom();
         }
@@ -156,5 +155,24 @@ namespace Counter_Wpf
     
         }
 
+        private void image_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
+        {
+
+            double x = e.GetPosition(myCanvas).X; //get mouse coordinates over canvas
+            double y = e.GetPosition(myCanvas).Y;
+
+            Ellipse marker = new Ellipse
+            {
+                StrokeThickness = 3,
+                Stroke = Brushes.Red, // Creates hollow circle. Fill instead of Stroke for fill
+                Margin = new Thickness(x - 10, y - 10, 0, 0), // Minus half of width/height to place centered
+                Width = 20,
+                Height = 20
+        };
+
+            myCanvas.Children.Add(marker);
+
+
+        }
     }
 }
