@@ -9,3 +9,7 @@ Attempting to create an application where one can view a photo and then zoom in 
 * Text Comment Area
 * Display .exif data regarding date/location/camera type/etc 
 * Smaller thumbnail map with current view highlighted
+* Zoom at location of pointer on scroll zoom
+
+# Need to fix
+* Scroll zoom doesn't work while cursor over placed dot

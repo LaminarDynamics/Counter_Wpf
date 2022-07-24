@@ -171,8 +171,6 @@ namespace Counter_Wpf
         };
 
             myCanvas.Children.Add(marker);
-
-
         }
     }
 }
