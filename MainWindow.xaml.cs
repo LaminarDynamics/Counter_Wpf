@@ -26,6 +26,10 @@ namespace Counter_Wpf
         private Point translate_amount;
         private Point mouse_pos;
 
+        // Get screen size to dynamically size components
+        double screen_width = SystemParameters.PrimaryScreenWidth;
+        double screen_height = SystemParameters.PrimaryScreenHeight;
+
 
         private int index_of_catagories = 0;
         private List<Catagories> ListOfCatagories = new List<Catagories>();
@@ -34,12 +38,12 @@ namespace Counter_Wpf
         {
             InitializeComponent();
 
-            var dialog = new InfoDialog();
-            if (dialog.ShowDialog() == true)
-            {
-                MessageBox.Show("You said: " + dialog.ResponseText);
-                //https://stackoverflow.com/questions/2796470/wpf-create-a-dialog-prompt
-            }
+            //var dialog = new InfoDialog();
+            //if (dialog.ShowDialog() == true)
+            //{
+            //    MessageBox.Show("You said: " + dialog.ResponseText);
+            //    //https://stackoverflow.com/questions/2796470/wpf-create-a-dialog-prompt
+            //}
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -163,58 +167,77 @@ namespace Counter_Wpf
 
             index_of_catagories++;
 
+            //CatagoriesControl catagoriesControl = new CatagoriesControl
+            //{
+            //    Width = catagories.Width, // Sets to auto;
+            //    Height = 70,
+            //    Background = new SolidColorBrush(Color.FromArgb(100, 35, 94, 130)),
+            //    Margin = new Thickness(5, 2, 5, 5),
+            //    BorderBrush = new SolidColorBrush(Color.FromRgb(255,255,255))
+            //};
 
-            var catagoryStack = new StackPanel
+            CatagoriesControl catagoriesControl1 = new CatagoriesControl
             {
-                Height = 70,
-                Width = double.NaN, // Sets to auto
-                HorizontalAlignment = HorizontalAlignment.Stretch,
-                VerticalAlignment = VerticalAlignment.Top,
-                Margin = new Thickness(5, 2, 5, 5),
-                Background = new SolidColorBrush(Color.FromArgb(100, 35, 94, 130)),
-                Name = "catagory_" + index_of_catagories.ToString()
+                //Width = 500
             };
+            catagoriesControl1.colorCircle.Fill = new SolidColorBrush(Colors.Blue);
+           
+            catagories.Children.Add(catagoriesControl1);
+            //myStackPanel.Children.Add(catagoriesControl);
+            //bottom_right_grid.Children.Add(catagoriesControl);
 
 
-            // Color Circle Stuff
-            var rnd = new Random();
-            byte red = byte.Parse(rnd.Next(255).ToString());
-            byte green = byte.Parse(rnd.Next(255).ToString());
-            byte blue = byte.Parse(rnd.Next(255).ToString());
-            var circle = new Ellipse
-            {
-                Height = 50,
-                Width = 50,
-                Fill = new SolidColorBrush(Color.FromArgb(255, red, green, blue)),
-                HorizontalAlignment = HorizontalAlignment.Left,
-                VerticalAlignment = VerticalAlignment.Bottom,
-                Margin = new Thickness(10, 10, 0, 0),
-            };
-            catagoryStack.Children.Add(circle);
+            //var catagoryStack = new StackPanel
+            //{
+            //    Height = 70,
+            //    Width = double.NaN, // Sets to auto
+            //    HorizontalAlignment = HorizontalAlignment.Stretch,
+            //    VerticalAlignment = VerticalAlignment.Top,
+            //    Margin = new Thickness(5, 2, 5, 5),
+            //    Background = new SolidColorBrush(Color.FromArgb(100, 35, 94, 130)),
+            //    Name = "catagory_" + index_of_catagories.ToString()
+            //};
 
 
-            // Delete Button
-            var delete_btn = new Button
-            {
-                Height = 50,
-                Width = 50,
-                Background = new SolidColorBrush(Colors.Red),
-                HorizontalAlignment = HorizontalAlignment.Right,
-                VerticalAlignment = VerticalAlignment.Top,
-                Margin = new Thickness(0, -50, 10, 0),
-                Content = "X",
-                Name = "delete_" + index_of_catagories.ToString(),
-            };
-            delete_btn.Click += Delete_btn_Click;
+            //// Color Circle Stuff
+            //var rnd = new Random();
+            //byte red = byte.Parse(rnd.Next(255).ToString());
+            //byte green = byte.Parse(rnd.Next(255).ToString());
+            //byte blue = byte.Parse(rnd.Next(255).ToString());
+            //var circle = new Ellipse
+            //{
+            //    Height = 50,
+            //    Width = 50,
+            //    Fill = new SolidColorBrush(Color.FromArgb(255, red, green, blue)),
+            //    HorizontalAlignment = HorizontalAlignment.Left,
+            //    VerticalAlignment = VerticalAlignment.Bottom,
+            //    Margin = new Thickness(10, 10, 0, 0),
+            //};
+            //catagoryStack.Children.Add(circle);
+
+
+            //// Delete Button
+            //var delete_btn = new Button
+            //{
+            //    Height = 50,
+            //    Width = 50,
+            //    Background = new SolidColorBrush(Colors.Red),
+            //    HorizontalAlignment = HorizontalAlignment.Right,
+            //    VerticalAlignment = VerticalAlignment.Top,
+            //    Margin = new Thickness(0, -50, 10, 0),
+            //    Content = "X",
+            //    Name = "delete_" + index_of_catagories.ToString(),
+            //};
+            //delete_btn.Click += Delete_btn_Click;
 
 
 
-            catagoryStack.Children.Add(delete_btn);
+            //catagoryStack.Children.Add(delete_btn);
 
 
 
 
-            catagories.Children.Add(catagoryStack);
+            //catagories.Children.Add(catagoryStack);
 
 
 
