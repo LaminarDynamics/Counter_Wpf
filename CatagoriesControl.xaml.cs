@@ -25,19 +25,19 @@ namespace Counter_Wpf
             InitializeComponent();
         }
 
-        private void countTextbox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private void countTextbox_MouseDoubleClick(object sender, MouseButtonEventArgs e) // Change count manually
         {
             countTextbox.IsReadOnly = false;
             countTextbox.Background = Brushes.Red;
         }
 
-        private void countTextbox_MouseLeave(object sender, MouseEventArgs e)
+        private void countTextbox_MouseLeave(object sender, MouseEventArgs e) // After changing count manually
         {
             countTextbox.IsReadOnly = true;
             countTextbox.Background = Brushes.White;
         }
 
-        private void catagoryLabel_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private void catagoryLabel_MouseDoubleClick(object sender, MouseButtonEventArgs e) // Change catagory name
         {
             ChangeTextDialog setDialog = new ChangeTextDialog();
             setDialog.ShowDialog();
@@ -45,7 +45,7 @@ namespace Counter_Wpf
             //https://stackoverflow.com/questions/2796470/wpf-create-a-dialog-prompt
         }
 
-        private void deleteButton_Click(object sender, RoutedEventArgs e)
+        private void deleteButton_Click(object sender, RoutedEventArgs e) // Delete catagory
         {
             (Parent as StackPanel).Children.Remove(this);
             //https://social.msdn.microsoft.com/Forums/vstudio/en-US/5d0f24ce-9ced-4c3d-af83-3c55ea961d1e/close-a-wpf-user-control?forum=wpf    // Can't beleive this worked first try...

@@ -37,16 +37,9 @@ namespace Counter_Wpf
         public MainWindow()
         {
             InitializeComponent();
-
-            //var dialog = new InfoDialog();
-            //if (dialog.ShowDialog() == true)
-            //{
-            //    MessageBox.Show("You said: " + dialog.ResponseText);
-            //    //https://stackoverflow.com/questions/2796470/wpf-create-a-dialog-prompt
-            //}
         }
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
+        private void Window_Loaded(object sender, RoutedEventArgs e)    // Manual scaling for dynamic sizing (Hopefully)
         {
             // Get screen size to dynamically size components
             double screen_width = SystemParameters.PrimaryScreenWidth;
@@ -60,9 +53,6 @@ namespace Counter_Wpf
             groupBox.Height = screen_height * .5;
             groupBox.Width = (screen_width - image.Width) * .97;
 
-            // Add button scaling
-            //add_listBox_button.Width = listBox.Width * .95;
-
             // Slider scaling
             slider.Height = screen_height * .95;
             slider.Margin = new Thickness(image.Width - groupBox.Width, 0, 0, 0);
@@ -75,7 +65,7 @@ namespace Counter_Wpf
             bottom_right_grid.Width = (screen_width - image.Width) * .97;
         }
 
-        private void image_MouseWheel(object sender, MouseWheelEventArgs e)
+        private void image_MouseWheel(object sender, MouseWheelEventArgs e) // Mousewheel Zoom
         {
             // Zoom controls
             double zoom_speed = .5;
@@ -91,7 +81,7 @@ namespace Counter_Wpf
             slider.Value = image_zoom;
         }
 
-        private void ChangeTranslationAndZoom()
+        private void ChangeTranslationAndZoom() // Translation/Zoom logic implementation
         {
             // Move image by translation amount
             Matrix X = new Matrix();
@@ -100,14 +90,14 @@ namespace Counter_Wpf
             image.RenderTransform = new MatrixTransform(X);
         }
 
-        private void slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        private void slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)   // Slider Controls
         {
             // Zoom slider
             image_zoom = slider.Value;
             ChangeTranslationAndZoom();
         }
 
-        private void image_MouseMove_1(object sender, MouseEventArgs e)
+        private void image_MouseMove_1(object sender, MouseEventArgs e) // Translation/Zoom logic
         {
             // Used with left click to slide image
             mouse_pos = e.MouseDevice.GetPosition(image);
@@ -136,17 +126,6 @@ namespace Counter_Wpf
             textBox.Text = "Start pos is: " + start.ToString();
         }
 
-
-        private void add_listBox_button_Click(object sender, RoutedEventArgs e)
-        {
-            ListBoxItem listBoxItem = new ListBoxItem();
-
-            //listBoxItem.Name = "listBoxItemNumber" + index_of_items;
-            listBoxItem.HorizontalAlignment = HorizontalAlignment.Stretch;
-
-        }
-
-
         // Center and unzoom photo
         private void centerButton_Click(object sender, RoutedEventArgs e)
         {
@@ -162,19 +141,10 @@ namespace Counter_Wpf
 
         }
 
-        private void addCatButton_Click(object sender, RoutedEventArgs e)
+        private void addCatButton_Click(object sender, RoutedEventArgs e)   // Add new REUSEABLE user control for catagories
         {
 
             index_of_catagories++;
-
-            //CatagoriesControl catagoriesControl = new CatagoriesControl
-            //{
-            //    Width = catagories.Width, // Sets to auto;
-            //    Height = 70,
-            //    Background = new SolidColorBrush(Color.FromArgb(100, 35, 94, 130)),
-            //    Margin = new Thickness(5, 2, 5, 5),
-            //    BorderBrush = new SolidColorBrush(Color.FromRgb(255,255,255))
-            //};
 
             CatagoriesControl catagoriesControl1 = new CatagoriesControl
             {
@@ -183,98 +153,8 @@ namespace Counter_Wpf
             catagoriesControl1.colorCircle.Fill = new SolidColorBrush(Colors.Blue);
            
             catagories.Children.Add(catagoriesControl1);
-            //myStackPanel.Children.Add(catagoriesControl);
-            //bottom_right_grid.Children.Add(catagoriesControl);
-
-
-            //var catagoryStack = new StackPanel
-            //{
-            //    Height = 70,
-            //    Width = double.NaN, // Sets to auto
-            //    HorizontalAlignment = HorizontalAlignment.Stretch,
-            //    VerticalAlignment = VerticalAlignment.Top,
-            //    Margin = new Thickness(5, 2, 5, 5),
-            //    Background = new SolidColorBrush(Color.FromArgb(100, 35, 94, 130)),
-            //    Name = "catagory_" + index_of_catagories.ToString()
-            //};
-
-
-            //// Color Circle Stuff
-            //var rnd = new Random();
-            //byte red = byte.Parse(rnd.Next(255).ToString());
-            //byte green = byte.Parse(rnd.Next(255).ToString());
-            //byte blue = byte.Parse(rnd.Next(255).ToString());
-            //var circle = new Ellipse
-            //{
-            //    Height = 50,
-            //    Width = 50,
-            //    Fill = new SolidColorBrush(Color.FromArgb(255, red, green, blue)),
-            //    HorizontalAlignment = HorizontalAlignment.Left,
-            //    VerticalAlignment = VerticalAlignment.Bottom,
-            //    Margin = new Thickness(10, 10, 0, 0),
-            //};
-            //catagoryStack.Children.Add(circle);
-
-
-            //// Delete Button
-            //var delete_btn = new Button
-            //{
-            //    Height = 50,
-            //    Width = 50,
-            //    Background = new SolidColorBrush(Colors.Red),
-            //    HorizontalAlignment = HorizontalAlignment.Right,
-            //    VerticalAlignment = VerticalAlignment.Top,
-            //    Margin = new Thickness(0, -50, 10, 0),
-            //    Content = "X",
-            //    Name = "delete_" + index_of_catagories.ToString(),
-            //};
-            //delete_btn.Click += Delete_btn_Click;
-
-
-
-            //catagoryStack.Children.Add(delete_btn);
-
-
-
-
-            //catagories.Children.Add(catagoryStack);
-
-
-
-            //catagories.Children.Add(new Rectangle
-            //{
-            //    Name = rect_name,
-            //    Height = 70,
-            //    Fill = new SolidColorBrush(Color.FromRgb(255, 255, 255)),
-            //    Stroke = new SolidColorBrush(Colors.Black),
-            //    Width = double.NaN, // Sets to auto
-            //    HorizontalAlignment = HorizontalAlignment.Stretch,
-            //    VerticalAlignment = VerticalAlignment.Top,
-            //    Margin = new Thickness(5, 2, 5, 5),
-            //    DataContext = index_of_catagories.ToString()
-            //});
-
-            //var tool = new StackPanel();
-            //tool.Children.Add(new TextBlock() { Text = "mooooers" });
-
+    
         }
-
-        private void Delete_btn_Click(object sender, RoutedEventArgs e)
-        {
-            // Get index
-            Button btn = (Button)sender;
-            string ident = btn.Name;
-
-            string[] ident_parts = ident.Split(char.Parse("_"));
-            int index = int.Parse(ident_parts[1]);
-
-            //catagories.Children.Remove(this);
-            //Button btn = (Button)sender;
-            //MessageBox.Show(btn.Name.ToString());
-
-            catagories.Children.RemoveAt(index);
-        }
-
 
     }
 }

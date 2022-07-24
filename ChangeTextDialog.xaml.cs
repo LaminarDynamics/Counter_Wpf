@@ -28,15 +28,14 @@ namespace Counter_Wpf
 
         private void setButton_Click(object sender, RoutedEventArgs e)
         {
-            if (newNameTextBox.Text != "")
+            if (newNameTextBox.Text != "")  // If new name is typed in textbox
             {
                 NewName = newNameTextBox.Text.ToString();
                 Close();
             }
-
         }
 
-        private void cancelButton_Click(object sender, RoutedEventArgs e)
+        private void cancelButton_Click(object sender, RoutedEventArgs e) // User cancels rename
         {
             Close();
         }
