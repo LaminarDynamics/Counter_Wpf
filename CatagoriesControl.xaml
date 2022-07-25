@@ -17,6 +17,7 @@
                 </LinearGradientBrush>
             </Rectangle.Fill>
         </Rectangle>
+        
         <Ellipse x:Name="colorCircle" Fill="Gainsboro" HorizontalAlignment="Left" Height="50" Margin="10,12,10,10" Stroke="Black" VerticalAlignment="Stretch" Width="50"/>
         <Button x:Name="deleteButton" Content="X" HorizontalAlignment="Right" Margin="10,10,15,10" VerticalAlignment="Center" Width="30" Height="30" Background="#FFCA1C1C" ToolTip="Delete current tab" Click="deleteButton_Click"/>
         <Label x:Name="catagoryLabel" Content="Stupid Animal Name" HorizontalAlignment="Center" Margin="0,20,50,18.4" VerticalAlignment="Center" Width="155" Foreground="White" FontSize="16" ToolTip="Double Click to edit" MouseDoubleClick="catagoryLabel_MouseDoubleClick"/>

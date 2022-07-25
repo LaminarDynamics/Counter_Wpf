@@ -192,27 +192,27 @@ namespace Counter_Wpf
             myCanvas.Children.Add(marker);
         }
 
-        private void Add(Catagories object_here)
-        {
-            addStuff.Add(object_here);
-        }
+        //private void Add(Catagories object_here)
+        //{
+        //    addStuff.Add(object_here);
+        //}
 
 
-        public void AddToCatList(int indexOfCatagoriesssss, string name, int count, string color)
-        {
-            //Console.WriteLine(my_object.Color);
-            //ListOfCatagories.Add(my_object);
+        //public void AddToCatList(int indexOfCatagoriesssss, string name, int count, string color)
+        //{
+        //    //Console.WriteLine(my_object.Color);
+        //    //ListOfCatagories.Add(my_object);
 
-            listOfCatagoryObjects.Add(new Catagories(indexOfCatagoriesssss, name, count, color));
+        //    listOfCatagoryObjects.Add(new Catagories(indexOfCatagoriesssss, name, count, color));
 
-            ////addStuff.Add(my_object);
-            //Add(my_object);
+        //    ////addStuff.Add(my_object);
+        //    //Add(my_object);
 
-            Console.WriteLine("Count is: " + listOfCatagoryObjects.Count);
-            foreach (var item in listOfCatagoryObjects)
-            {
-                Console.WriteLine(item.Name);
-            }
-        }
+        //    Console.WriteLine("Count is: " + listOfCatagoryObjects.Count);
+        //    foreach (var item in listOfCatagoryObjects)
+        //    {
+        //        Console.WriteLine(item.Name);
+        //    }
+        //}
     }
 }

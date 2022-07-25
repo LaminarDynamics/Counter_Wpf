@@ -9,22 +9,13 @@ namespace Counter_Wpf
     public class Catagories
     {
        
-        public Catagories(int index, string name, int count, string color)
+        public Catagories(int index, string name, int count, byte[] color)
         {
             this.index = index;
             this.name = name;
             this.count = count;
             this.color = color;
         }
-
-        public static List<Catagories> listOfCatagories;
-
-        public List<Catagories> MyProperty
-        {
-            get { return listOfCatagories; }
-            set { listOfCatagories = value; }
-        }
-
 
 
         private int index;
@@ -51,21 +42,14 @@ namespace Counter_Wpf
             set { count = value; }
         }
 
-        private string color;
+        private byte[] color;
 
-        public string Color
+        public byte[] Color
         {
             get { return color; }
             set { color = value; }
         }
 
-
-
-
-        //public int Index { get; set; }
-        //public string Name { get; set; }
-        //public int Count { get; set; }
-        //public string Color { get; set; }
 
     }
 }

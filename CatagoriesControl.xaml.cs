@@ -55,7 +55,8 @@ namespace Counter_Wpf
 
         public Catagories CatagoryAdded()
         {
-            var newObjectToAdd = new Catagories(indexOfCatagories, "this a one", 47, "red");
+            byte[] color = { 25, 255, 255 };
+            var newObjectToAdd = new Catagories(indexOfCatagories, "this a one", 47, color);
             indexOfCatagories++;
             return newObjectToAdd;
         }
@@ -63,7 +64,50 @@ namespace Counter_Wpf
         public void RestyleControl(Catagories currentObject)
         {
             Console.WriteLine(currentObject.Color);
-            catagoryLabel.Content = "REEEESEt";
+            catagoryLabel.Content = currentObject.Name;
+            countTextbox.Text = currentObject.Count.ToString();
+
+
+            //colorCircle.Fill = new SolidColorBrush(Color.FromRgb(currentObject.Color[0], currentObject.Color[0], currentObject.Color[0]));
+            colorCircle.Fill = new SolidColorBrush(Color.FromRgb(RandomColor()[0], RandomColor()[1], RandomColor()[2]));
+
+
+
+
+        }
+
+        public byte[] RandomColor()
+        {
+
+            var rnd = new Random();
+            int number = rnd.Next(5);
+
+            switch (number)
+            {
+                case 0:
+                    byte[] color0 = { 0, 163, 44 }; // Green
+                    return color0;
+
+                case 1:
+                    byte[] color1 = { 0, 11, 163 }; // Blue
+                    return color1;
+
+                case 2:
+                    byte[] color2 = { 163, 0, 0 }; // Red
+                    return color2;
+
+                case 3:
+                    byte[] color3 = { 163, 0, 158 }; // Purple
+                    return color3;
+
+                case 4:
+                    byte[] color4 = { 209, 125, 23 }; // Orange
+                    return color4;
+
+                default:
+                    byte[] color5 = { 0, 0, 0 };
+                    return color5;
+            }
 
         }
     }
