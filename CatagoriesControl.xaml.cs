@@ -20,6 +20,8 @@ namespace Counter_Wpf
     /// </summary>
     public partial class CatagoriesControl : UserControl
     {
+        public static int indexOfCatagories = 0;
+
         public CatagoriesControl()
         {
             InitializeComponent();
@@ -49,6 +51,20 @@ namespace Counter_Wpf
         {
             (Parent as StackPanel).Children.Remove(this);
             //https://social.msdn.microsoft.com/Forums/vstudio/en-US/5d0f24ce-9ced-4c3d-af83-3c55ea961d1e/close-a-wpf-user-control?forum=wpf    // Can't beleive this worked first try...
+        }
+
+        public Catagories CatagoryAdded()
+        {
+            var newObjectToAdd = new Catagories(indexOfCatagories, "this a one", 47, "red");
+            indexOfCatagories++;
+            return newObjectToAdd;
+        }
+
+        public void RestyleControl(Catagories currentObject)
+        {
+            Console.WriteLine(currentObject.Color);
+            catagoryLabel.Content = "REEEESEt";
+
         }
     }
 }

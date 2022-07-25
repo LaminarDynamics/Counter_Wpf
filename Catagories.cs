@@ -6,13 +6,9 @@ using System.Threading.Tasks;
 
 namespace Counter_Wpf
 {
-    class Catagories
+    public class Catagories
     {
-        private int index;
-        private string name;
-        private int count;
-        private string color;
-
+       
         public Catagories(int index, string name, int count, string color)
         {
             this.index = index;
@@ -21,10 +17,55 @@ namespace Counter_Wpf
             this.color = color;
         }
 
-        public int Index { get; set; }
-        public string Name { get; set; }
-        public int Count { get; set; }
-        public string Color { get; set; }
+        public static List<Catagories> listOfCatagories;
+
+        public List<Catagories> MyProperty
+        {
+            get { return listOfCatagories; }
+            set { listOfCatagories = value; }
+        }
+
+
+
+        private int index;
+
+        public int Index
+        {
+            get { return index; }
+            set { index = value; }
+        }
+
+        private string name;
+
+        public string Name
+        {
+            get { return name; }
+            set { name = value; }
+        }
+
+        private int count;
+
+        public int Count
+        {
+            get { return count; }
+            set { count = value; }
+        }
+
+        private string color;
+
+        public string Color
+        {
+            get { return color; }
+            set { color = value; }
+        }
+
+
+
+
+        //public int Index { get; set; }
+        //public string Name { get; set; }
+        //public int Count { get; set; }
+        //public string Color { get; set; }
 
     }
 }

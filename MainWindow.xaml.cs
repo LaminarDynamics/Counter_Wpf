@@ -18,6 +18,9 @@ namespace Counter_Wpf
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
+    /// 
+
+       
     public partial class MainWindow : Window
     {
         private double image_zoom = 1;
@@ -28,7 +31,9 @@ namespace Counter_Wpf
 
 
         private int index_of_catagories = 0;
-        private List<Catagories> ListOfCatagories = new List<Catagories>();
+        public static List<Catagories> listOfCatagoryObjects = new List<Catagories>();
+
+        private List<Catagories> addStuff = new List<Catagories>();
 
         public MainWindow()
         {
@@ -40,6 +45,7 @@ namespace Counter_Wpf
             // Get screen size to dynamically size components
             double screen_width = SystemParameters.PrimaryScreenWidth;
             double screen_height = SystemParameters.PrimaryScreenHeight;
+        
 
             // Scale canvas
             double canvas_scale_width = .75;
@@ -150,9 +156,23 @@ namespace Counter_Wpf
                 //Width = 500
             };
             catagoriesControl1.colorCircle.Fill = new SolidColorBrush(Colors.Blue);
-           
+
             catagories.Children.Add(catagoriesControl1);
-    
+
+            var currentObject = catagoriesControl1.CatagoryAdded();
+
+            listOfCatagoryObjects.Add(currentObject);
+
+            foreach (var item in listOfCatagoryObjects)
+            {
+                //Console.WriteLine("Index: " + item.Index.ToString());
+                //Console.WriteLine("Name: " + item.Name);
+                //Console.WriteLine("Count: " + item.Count.ToString());
+                //Console.WriteLine("Color: " + item.Color);
+                Console.WriteLine("-------------------------------------");
+            }
+
+            catagoriesControl1.RestyleControl(currentObject);
         }
 
         private void image_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
@@ -168,9 +188,31 @@ namespace Counter_Wpf
                 Margin = new Thickness(x - 10, y - 10, 0, 0), // Minus half of width/height to place centered
                 Width = 20,
                 Height = 20
-        };
-
+            };
             myCanvas.Children.Add(marker);
+        }
+
+        private void Add(Catagories object_here)
+        {
+            addStuff.Add(object_here);
+        }
+
+
+        public void AddToCatList(int indexOfCatagoriesssss, string name, int count, string color)
+        {
+            //Console.WriteLine(my_object.Color);
+            //ListOfCatagories.Add(my_object);
+
+            listOfCatagoryObjects.Add(new Catagories(indexOfCatagoriesssss, name, count, color));
+
+            ////addStuff.Add(my_object);
+            //Add(my_object);
+
+            Console.WriteLine("Count is: " + listOfCatagoryObjects.Count);
+            foreach (var item in listOfCatagoryObjects)
+            {
+                Console.WriteLine(item.Name);
+            }
         }
     }
 }
