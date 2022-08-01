@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="70" d:DesignWidth="500">
     <Grid>
-        <Rectangle x:Name="catagoryRect" HorizontalAlignment="Stretch" Height="70" Margin="5,5,5,0" Stroke="Black" VerticalAlignment="Top" Width="Auto">
+        <Rectangle x:Name="catagoryRect" HorizontalAlignment="Stretch" Height="70" Margin="5,5,5,0" Stroke="Black" VerticalAlignment="Top" Width="Auto" MouseLeftButtonDown="catagoryRect_MouseLeftButtonDown">
             <Rectangle.Fill>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="Black" Offset="0"/>

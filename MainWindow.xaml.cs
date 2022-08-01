@@ -20,7 +20,7 @@ namespace Counter_Wpf
     /// </summary>
     /// 
 
-       
+
     public partial class MainWindow : Window
     {
         private double image_zoom = 1;
@@ -45,7 +45,7 @@ namespace Counter_Wpf
             // Get screen size to dynamically size components
             double screen_width = SystemParameters.PrimaryScreenWidth;
             double screen_height = SystemParameters.PrimaryScreenHeight;
-        
+
 
             // Scale canvas
             double canvas_scale_width = .75;
@@ -154,21 +154,26 @@ namespace Counter_Wpf
             CatagoriesControl catagoriesControl1 = new CatagoriesControl
             {
                 //Width = 500
+
             };
+
             catagoriesControl1.colorCircle.Fill = new SolidColorBrush(Colors.Blue);
+            catagoriesControl1.Name = catagoriesControl1.RandomString(6);
 
             catagories.Children.Add(catagoriesControl1);
 
+
             var currentObject = catagoriesControl1.CatagoryAdded();
+
 
             listOfCatagoryObjects.Add(currentObject);
 
             foreach (var item in listOfCatagoryObjects)
             {
-                //Console.WriteLine("Index: " + item.Index.ToString());
-                //Console.WriteLine("Name: " + item.Name);
-                //Console.WriteLine("Count: " + item.Count.ToString());
-                //Console.WriteLine("Color: " + item.Color);
+                Console.WriteLine("Index: " + item.Index.ToString());
+                Console.WriteLine("Name: " + item.Name);
+                Console.WriteLine("Count: " + item.Count.ToString());
+                Console.WriteLine("Color: " + item.Color);
                 Console.WriteLine("-------------------------------------");
             }
 
@@ -192,6 +197,7 @@ namespace Counter_Wpf
             myCanvas.Children.Add(marker);
         }
 
+       
         //private void Add(Catagories object_here)
         //{
         //    addStuff.Add(object_here);

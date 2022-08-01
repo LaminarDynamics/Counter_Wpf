@@ -31,6 +31,7 @@ namespace Counter_Wpf
         {
             countTextbox.IsReadOnly = false;
             countTextbox.Background = Brushes.Red;
+
         }
 
         private void countTextbox_MouseLeave(object sender, MouseEventArgs e) // After changing count manually
@@ -76,6 +77,8 @@ namespace Counter_Wpf
 
         }
 
+        
+
         public byte[] RandomColor()
         {
 
@@ -109,6 +112,21 @@ namespace Counter_Wpf
                     return color5;
             }
 
+        }
+
+        private void catagoryRect_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            MessageBox.Show(this.Name);
+        }
+
+
+        // Random name for object/control reference
+        private static Random random = new Random();
+        public string RandomString(int length)
+        {
+            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            return new string(Enumerable.Repeat(chars, length)
+                .Select(s => s[random.Next(s.Length)]).ToArray());
         }
     }
 }
