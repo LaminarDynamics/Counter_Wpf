@@ -148,36 +148,44 @@ namespace Counter_Wpf
 
         private void addCatButton_Click(object sender, RoutedEventArgs e)   // Add new REUSEABLE user control for catagories
         {
+            // Get name of catagory from user 
+            ChangeTextDialog setDialog = new ChangeTextDialog();
+            setDialog.ShowDialog();
 
-            index_of_catagories++;
-
-            CatagoriesControl catagoriesControl1 = new CatagoriesControl
+            if (!string.IsNullOrWhiteSpace(setDialog.newNameTextBox.Text))    // Only build crap if user gives a name
             {
-                //Width = 500
+                string userGivenName = setDialog.NewName;
+                CatagoriesControl catagoriesControl1 = new CatagoriesControl
+                {
+                    //Width = 500
+                };
 
-            };
+                catagoriesControl1.colorCircle.Fill = new SolidColorBrush(Colors.Blue);
 
-            catagoriesControl1.colorCircle.Fill = new SolidColorBrush(Colors.Blue);
-            catagoriesControl1.Name = catagoriesControl1.RandomString(6);
+                //catagoriesControl1.Name = catagoriesControl1.RandomString(6);
+                catagoriesControl1.Name = userGivenName;
 
-            catagories.Children.Add(catagoriesControl1);
-
-
-            var currentObject = catagoriesControl1.CatagoryAdded();
+                catagories.Children.Add(catagoriesControl1);
+                var currentObject = catagoriesControl1.CatagoryAdded(index_of_catagories, userGivenName, 0);
 
 
-            listOfCatagoryObjects.Add(currentObject);
+                listOfCatagoryObjects.Add(currentObject);
 
-            foreach (var item in listOfCatagoryObjects)
-            {
-                Console.WriteLine("Index: " + item.Index.ToString());
-                Console.WriteLine("Name: " + item.Name);
-                Console.WriteLine("Count: " + item.Count.ToString());
-                Console.WriteLine("Color: " + item.Color);
-                Console.WriteLine("-------------------------------------");
+                foreach (var item in listOfCatagoryObjects)
+                {
+                    Console.WriteLine("Index: " + item.Index.ToString());
+                    Console.WriteLine("Name: " + item.Name);
+                    Console.WriteLine("Count: " + item.Count.ToString());
+                    Console.WriteLine("Color: " + item.Color);
+                    Console.WriteLine("-------------------------------------");
+                }
+
+                catagoriesControl1.RestyleControl(currentObject);
+                index_of_catagories++;
+
             }
 
-            catagoriesControl1.RestyleControl(currentObject);
+
         }
 
         private void image_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
@@ -197,7 +205,7 @@ namespace Counter_Wpf
             myCanvas.Children.Add(marker);
         }
 
-       
+
         //private void Add(Catagories object_here)
         //{
         //    addStuff.Add(object_here);

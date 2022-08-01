@@ -14,7 +14,7 @@
         </Grid.ColumnDefinitions>
         <Label x:Name="label" Content="Set Name: " HorizontalAlignment="Left" Height="24" Margin="47.2,15,0,0" VerticalAlignment="Top" Width="69" Grid.Column="2"/>
         <TextBox x:Name="newNameTextBox" Grid.Column="2" HorizontalAlignment="Left" Height="20" Margin="116.2,19,-16.8,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="75"/>
-        <Button x:Name="setButton" Content="Set" Grid.Column="2" HorizontalAlignment="Left" Height="30" Margin="137.2,82,-52.8,10" VerticalAlignment="Top" Width="90" Click="setButton_Click"/>
+        <Button x:Name="setButton" Content="Set" Grid.Column="2" HorizontalAlignment="Left" Height="30" Margin="137.2,82,-52.8,10" VerticalAlignment="Top" Width="90" Click="setButton_Click" IsDefault="True"/>
         <Button x:Name="cancelButton" Content="Cancel" Grid.Column="2" HorizontalAlignment="Left" Height="30" Margin="7.2,82,0,10" VerticalAlignment="Top" Width="90" Click="cancelButton_Click"/>
 
     </Grid>

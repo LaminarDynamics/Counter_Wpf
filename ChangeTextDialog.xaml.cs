@@ -22,6 +22,7 @@ namespace Counter_Wpf
         public ChangeTextDialog()
         {
             InitializeComponent();
+            newNameTextBox.Focus();
         }
 
         public string NewName { get; set; }
