@@ -40,6 +40,13 @@ namespace Counter_Wpf
             InitializeComponent();
         }
 
+        protected override void OnClosed(EventArgs e)   // Need this to make closing the program work right after CatagoriesControls added
+        {
+            base.OnClosed(e);
+
+            Application.Current.Shutdown();
+        }
+
         private void Window_Loaded(object sender, RoutedEventArgs e)    // Manual scaling for dynamic sizing (Hopefully)
         {
             // Get screen size to dynamically size components
@@ -160,6 +167,8 @@ namespace Counter_Wpf
                     //Width = 500
                 };
 
+                
+
                 catagoriesControl1.colorCircle.Fill = new SolidColorBrush(Colors.Blue);
 
                 //catagoriesControl1.Background = new SolidColorBrush(Colors.Aqua);
@@ -218,7 +227,7 @@ namespace Counter_Wpf
 
         public void CountChanged(int new_count)
         {
-            MessageBox.Show("AAAAAAAAAHHHH!!" + new_count.ToString());
+            //MessageBox.Show("AAAAAAAAAHHHH!!" + new_count.ToString());
         }
     }
 }

@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:Counter_Wpf"
              mc:Ignorable="d" 
              d:DesignHeight="70" d:DesignWidth="500">
-    
+
     <Grid>
         
         <Rectangle x:Name="catagoryRect" HorizontalAlignment="Stretch" Height="70" Margin="5,5,5,0" Stroke="Black" VerticalAlignment="Top" Width="Auto" MouseLeftButtonDown="catagoryRect_MouseLeftButtonDown">

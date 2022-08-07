@@ -122,23 +122,24 @@ namespace Counter_Wpf
         private void catagoryRect_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             //Background = new SolidColorBrush(Colors.Red);
-            SolidColorBrush blueBackground = new SolidColorBrush(Colors.Blue);
+            SolidColorBrush noBackground = new SolidColorBrush(Colors.Transparent);
 
+            
 
-            Parent.SetValue(BackgroundProperty, blueBackground);
+            Parent.SetValue(BackgroundProperty, noBackground);
 
             foreach (var child in (Parent as StackPanel).Children.OfType<CatagoriesControl>())  // Changed object to var and added OfType stuff. Now it works
             {
                 //CatagoriesControl current = child;
 
-                child.Background = blueBackground;
+                child.Background = noBackground;
 
 
                 Console.WriteLine("This one: " + child.ToString());
                 //Parent.SetValue(BackgroundProperty, blueBackground);
             }
 
-            MessageBox.Show(this.Name);
+            //MessageBox.Show(this.Name);
             this.Background = new SolidColorBrush(Colors.Red);
 
 
