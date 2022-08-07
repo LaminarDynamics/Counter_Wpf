@@ -21,6 +21,9 @@ namespace Counter_Wpf
     public partial class CatagoriesControl : UserControl
     {
         public static int indexOfCatagories = 0;
+        public string selectedCatagory;
+
+        public MainWindow MainWindow = new MainWindow();
 
         public CatagoriesControl()
         {
@@ -38,6 +41,7 @@ namespace Counter_Wpf
         {
             countTextbox.IsReadOnly = true;
             countTextbox.Background = Brushes.White;
+            CountChangedManually();
         }
 
         private void catagoryLabel_MouseDoubleClick(object sender, MouseButtonEventArgs e) // Change catagory name
@@ -77,7 +81,7 @@ namespace Counter_Wpf
 
         }
 
-        
+
 
         public byte[] RandomColor()
         {
@@ -114,9 +118,30 @@ namespace Counter_Wpf
 
         }
 
+        public CatagoriesControl activeControl;
         private void catagoryRect_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
+            //Background = new SolidColorBrush(Colors.Red);
+            SolidColorBrush blueBackground = new SolidColorBrush(Colors.Blue);
+
+
+            Parent.SetValue(BackgroundProperty, blueBackground);
+
+            foreach (var child in (Parent as StackPanel).Children.OfType<CatagoriesControl>())  // Changed object to var and added OfType stuff. Now it works
+            {
+                //CatagoriesControl current = child;
+
+                child.Background = blueBackground;
+
+
+                Console.WriteLine("This one: " + child.ToString());
+                //Parent.SetValue(BackgroundProperty, blueBackground);
+            }
+
             MessageBox.Show(this.Name);
+            this.Background = new SolidColorBrush(Colors.Red);
+
+
         }
 
 
@@ -127,6 +152,14 @@ namespace Counter_Wpf
             const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
             return new string(Enumerable.Repeat(chars, length)
                 .Select(s => s[random.Next(s.Length)]).ToArray());
+        }
+
+        private void CountChangedManually()
+        {
+            if (int.TryParse(countTextbox.Text, out int count)) // See if textbox only contains numbers
+            {
+                MainWindow.CountChanged(count);
+            }
         }
     }
 }

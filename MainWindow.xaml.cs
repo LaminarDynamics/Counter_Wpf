@@ -33,7 +33,7 @@ namespace Counter_Wpf
         private int index_of_catagories = 0;
         public static List<Catagories> listOfCatagoryObjects = new List<Catagories>();
 
-        private List<Catagories> addStuff = new List<Catagories>();
+
 
         public MainWindow()
         {
@@ -162,23 +162,33 @@ namespace Counter_Wpf
 
                 catagoriesControl1.colorCircle.Fill = new SolidColorBrush(Colors.Blue);
 
+                //catagoriesControl1.Background = new SolidColorBrush(Colors.Aqua);
+
                 //catagoriesControl1.Name = catagoriesControl1.RandomString(6);
-                catagoriesControl1.Name = userGivenName;
+                catagoriesControl1.Name = userGivenName.ToString();
 
                 catagories.Children.Add(catagoriesControl1);
                 var currentObject = catagoriesControl1.CatagoryAdded(index_of_catagories, userGivenName, 0);
+                ////////////////////////////////////////////
+               
+                
+
+                ///////////////////////////////////////
 
 
                 listOfCatagoryObjects.Add(currentObject);
 
                 foreach (var item in listOfCatagoryObjects)
                 {
+                    
                     Console.WriteLine("Index: " + item.Index.ToString());
                     Console.WriteLine("Name: " + item.Name);
                     Console.WriteLine("Count: " + item.Count.ToString());
                     Console.WriteLine("Color: " + item.Color);
                     Console.WriteLine("-------------------------------------");
+            
                 }
+                
 
                 catagoriesControl1.RestyleControl(currentObject);
                 index_of_catagories++;
@@ -206,27 +216,9 @@ namespace Counter_Wpf
         }
 
 
-        //private void Add(Catagories object_here)
-        //{
-        //    addStuff.Add(object_here);
-        //}
-
-
-        //public void AddToCatList(int indexOfCatagoriesssss, string name, int count, string color)
-        //{
-        //    //Console.WriteLine(my_object.Color);
-        //    //ListOfCatagories.Add(my_object);
-
-        //    listOfCatagoryObjects.Add(new Catagories(indexOfCatagoriesssss, name, count, color));
-
-        //    ////addStuff.Add(my_object);
-        //    //Add(my_object);
-
-        //    Console.WriteLine("Count is: " + listOfCatagoryObjects.Count);
-        //    foreach (var item in listOfCatagoryObjects)
-        //    {
-        //        Console.WriteLine(item.Name);
-        //    }
-        //}
+        public void CountChanged(int new_count)
+        {
+            MessageBox.Show("AAAAAAAAAHHHH!!" + new_count.ToString());
+        }
     }
 }

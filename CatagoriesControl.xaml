@@ -6,9 +6,13 @@
              xmlns:local="clr-namespace:Counter_Wpf"
              mc:Ignorable="d" 
              d:DesignHeight="70" d:DesignWidth="500">
+    
     <Grid>
+        
         <Rectangle x:Name="catagoryRect" HorizontalAlignment="Stretch" Height="70" Margin="5,5,5,0" Stroke="Black" VerticalAlignment="Top" Width="Auto" MouseLeftButtonDown="catagoryRect_MouseLeftButtonDown">
+           
             <Rectangle.Fill>
+                
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="Black" Offset="0"/>
                     <GradientStop Color="#FF67B7BF" Offset="1"/>
@@ -17,6 +21,7 @@
                 </LinearGradientBrush>
             </Rectangle.Fill>
         </Rectangle>
+                    
         
         <Ellipse x:Name="colorCircle" Fill="Gainsboro" HorizontalAlignment="Left" Height="50" Margin="10,12,10,10" Stroke="Black" VerticalAlignment="Stretch" Width="50"/>
         <Button x:Name="deleteButton" Content="X" HorizontalAlignment="Right" Margin="10,10,15,10" VerticalAlignment="Center" Width="30" Height="30" Background="#FFCA1C1C" ToolTip="Delete current tab" Click="deleteButton_Click"/>
@@ -24,4 +29,7 @@
         <TextBox x:Name="countTextbox" HorizontalAlignment="Right" Height="20" Margin="0,0,65,0" TextWrapping="Wrap" Text="100" VerticalAlignment="Center" Width="47" IsReadOnly="True" FontWeight="Bold" MouseDoubleClick="countTextbox_MouseDoubleClick" MouseLeave="countTextbox_MouseLeave" ToolTip="Double Click to change value"/>
 
     </Grid>
+    
+        
+   
 </UserControl>

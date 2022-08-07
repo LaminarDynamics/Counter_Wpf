@@ -23,3 +23,4 @@ C:\Users\Owner-PC\Documents\AcerProgramProjects\ProgramProjects\C#_Projects\CS I
 C:\Users\Owner-PC\Documents\AcerProgramProjects\ProgramProjects\C#_Projects\CS Image\Counter_Thing\Dot_Counter_Wpf\Counter_Wpf\obj\Debug\CatagoriesControl.baml
 C:\Users\Owner-PC\Documents\AcerProgramProjects\ProgramProjects\C#_Projects\CS Image\Counter_Thing\Dot_Counter_Wpf\Counter_Wpf\obj\Debug\ChangeTextDialog.g.cs
 C:\Users\Owner-PC\Documents\AcerProgramProjects\ProgramProjects\C#_Projects\CS Image\Counter_Thing\Dot_Counter_Wpf\Counter_Wpf\obj\Debug\ChangeTextDialog.baml
+C:\Users\Owner-PC\Documents\AcerProgramProjects\ProgramProjects\C#_Projects\CS Image\Counter_Thing\Dot_Counter_Wpf\Counter_Wpf\obj\Debug\GeneratedInternalTypeHelper.g.cs
