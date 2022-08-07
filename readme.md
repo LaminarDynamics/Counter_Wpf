@@ -12,4 +12,9 @@ Attempting to create an application where one can view a photo and then zoom in 
 * Zoom at location of pointer on scroll zoom
 
 # Need to fix
+* Don't allow multiple catagories of the same name else everything will break
+* Weird issue if spaces in catagory name
 * Scroll zoom doesn't work while cursor over placed dot
+
+# Screenshot as of 8-7-22
+![image](Source_Images/sample.png)

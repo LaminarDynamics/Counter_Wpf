@@ -21,7 +21,6 @@ namespace Counter_Wpf
     public partial class CatagoriesControl : UserControl
     {
         public static int indexOfCatagories = 0;
-        public string selectedCatagory;
 
         public MainWindow MainWindow = new MainWindow();
 
@@ -58,10 +57,10 @@ namespace Counter_Wpf
             //https://social.msdn.microsoft.com/Forums/vstudio/en-US/5d0f24ce-9ced-4c3d-af83-3c55ea961d1e/close-a-wpf-user-control?forum=wpf    // Can't beleive this worked first try...
         }
 
-        public Catagories CatagoryAdded(int index, string name, int count)
+        public Catagories CatagoryAdded(int index, string name, int count, bool active)
         {
             byte[] color = { 25, 255, 255 };
-            var newObjectToAdd = new Catagories(index, name, count, color);
+            var newObjectToAdd = new Catagories(index, name, count, color, active);
             indexOfCatagories++;
             return newObjectToAdd;
         }
@@ -72,15 +71,8 @@ namespace Counter_Wpf
             catagoryLabel.Content = currentObject.Name;
             countTextbox.Text = currentObject.Count.ToString();
 
-
-            //colorCircle.Fill = new SolidColorBrush(Color.FromRgb(currentObject.Color[0], currentObject.Color[0], currentObject.Color[0]));
             colorCircle.Fill = new SolidColorBrush(Color.FromRgb(RandomColor()[0], RandomColor()[1], RandomColor()[2]));
-
-
-
-
         }
-
 
 
         public byte[] RandomColor()
@@ -118,30 +110,44 @@ namespace Counter_Wpf
 
         }
 
-        public CatagoriesControl activeControl;
-        private void catagoryRect_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void catagoryRect_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)    // Set active catagory and change colors
         {
-            //Background = new SolidColorBrush(Colors.Red);
+            // Set all backgrounds the same
             SolidColorBrush noBackground = new SolidColorBrush(Colors.Transparent);
-
-            
-
             Parent.SetValue(BackgroundProperty, noBackground);
-
             foreach (var child in (Parent as StackPanel).Children.OfType<CatagoriesControl>())  // Changed object to var and added OfType stuff. Now it works
             {
-                //CatagoriesControl current = child;
-
                 child.Background = noBackground;
-
-
-                Console.WriteLine("This one: " + child.ToString());
-                //Parent.SetValue(BackgroundProperty, blueBackground);
             }
-
-            //MessageBox.Show(this.Name);
+           
+            // Set only one background to highlighted
             this.Background = new SolidColorBrush(Colors.Red);
 
+            // Set all objects to inactive except hightlighted
+            MainWindow.SelectedCatagoryChange(this.Name.ToString());    // Send which catagory is active to the main window to change object
+        }
+
+        /// <summary>
+        /// Set which catagory is hightlighted
+        /// </summary>
+        /// <param name="catagoryControlToHighlightName">Name of catagory to hightlight</param>
+        public void HighlightCatagory(string catagoryControlToHighlightName)
+        {
+            // Set all backgrounds the same
+            SolidColorBrush noBackground = new SolidColorBrush(Colors.Transparent);
+            //Parent.SetValue(BackgroundProperty, noBackground);
+            foreach (var child in (Parent as StackPanel).Children.OfType<CatagoriesControl>())  // Changed object to var and added OfType stuff. Now it works
+            {
+                if (child.Name != catagoryControlToHighlightName)
+                {
+                    child.Background = noBackground;
+                }
+                else
+                {
+                    child.Background = new SolidColorBrush(Colors.Red);
+                }
+
+            }
 
         }
 

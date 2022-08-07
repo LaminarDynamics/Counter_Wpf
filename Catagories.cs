@@ -9,12 +9,13 @@ namespace Counter_Wpf
     public class Catagories
     {
        
-        public Catagories(int index, string name, int count, byte[] color)
+        public Catagories(int index, string name, int count, byte[] color, bool active)
         {
             this.index = index;
             this.name = name;
             this.count = count;
             this.color = color;
+            this.active = active;
         }
 
 
@@ -48,6 +49,15 @@ namespace Counter_Wpf
         {
             get { return color; }
             set { color = value; }
+        }
+
+
+        private bool active;
+
+        public bool Active
+        {
+            get { return active; }
+            set { active = value; }
         }
 
 

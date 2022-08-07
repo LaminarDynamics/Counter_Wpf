@@ -32,6 +32,8 @@ namespace Counter_Wpf
 
         private int index_of_catagories = 0;
         public static List<Catagories> listOfCatagoryObjects = new List<Catagories>();
+        public string activeCatagoryName = "";
+
 
 
 
@@ -43,7 +45,6 @@ namespace Counter_Wpf
         protected override void OnClosed(EventArgs e)   // Need this to make closing the program work right after CatagoriesControls added
         {
             base.OnClosed(e);
-
             Application.Current.Shutdown();
         }
 
@@ -167,46 +168,82 @@ namespace Counter_Wpf
                     //Width = 500
                 };
 
-                
-
                 catagoriesControl1.colorCircle.Fill = new SolidColorBrush(Colors.Blue);
-
-                //catagoriesControl1.Background = new SolidColorBrush(Colors.Aqua);
-
-                //catagoriesControl1.Name = catagoriesControl1.RandomString(6);
+                catagoriesControl1.Background = new SolidColorBrush(Colors.Red);
                 catagoriesControl1.Name = userGivenName.ToString();
 
-                catagories.Children.Add(catagoriesControl1);
-                var currentObject = catagoriesControl1.CatagoryAdded(index_of_catagories, userGivenName, 0);
-                ////////////////////////////////////////////
-               
                 
 
-                ///////////////////////////////////////
+                catagories.Children.Add(catagoriesControl1);    // Add to scrolller
 
+                var currentObject = catagoriesControl1.CatagoryAdded(index_of_catagories, userGivenName, 0, true);
 
-                listOfCatagoryObjects.Add(currentObject);
+          
 
-                foreach (var item in listOfCatagoryObjects)
-                {
-                    
-                    Console.WriteLine("Index: " + item.Index.ToString());
-                    Console.WriteLine("Name: " + item.Name);
-                    Console.WriteLine("Count: " + item.Count.ToString());
-                    Console.WriteLine("Color: " + item.Color);
-                    Console.WriteLine("-------------------------------------");
-            
-                }
-                
+                listOfCatagoryObjects.Add(currentObject);   // Add to list of objects
+
+                //foreach (var item in listOfCatagoryObjects)
+                //{
+
+                //    Console.WriteLine("Index: " + item.Index.ToString());
+                //    Console.WriteLine("Name: " + item.Name);
+                //    Console.WriteLine("Count: " + item.Count.ToString());
+                //    Console.WriteLine("Color: " + item.Color);
+                //    Console.WriteLine("-------------------------------------");
+
+                //}
+
 
                 catagoriesControl1.RestyleControl(currentObject);
                 index_of_catagories++;
 
-            }
 
+                SelectedCatagoryChange(catagoriesControl1.Name);    // Changes active object
+                catagoriesControl1.HighlightCatagory(catagoriesControl1.Name); // Changes active hightlighted component
+            }
 
         }
 
+
+        /// <summary>
+        /// Set which object is active
+        /// </summary>
+        /// <param name="receivedActiveCatagory">Name of object to activate</param>
+        public void SelectedCatagoryChange(string receivedActiveCatagory)
+        {
+            // Find previous active catagory and set to inactive
+            foreach (var currentCatagory in listOfCatagoryObjects)
+            {
+                if (currentCatagory.Name == receivedActiveCatagory)
+                {
+                    currentCatagory.Active = true;
+                }
+
+                else
+                {
+                    currentCatagory.Active = false;
+                }
+            }
+
+            // Test
+            foreach (var item in listOfCatagoryObjects)
+            {
+                Console.WriteLine("Change Detected");
+                Console.WriteLine("Index: " + item.Index.ToString());
+                Console.WriteLine("Name: " + item.Name);
+                Console.WriteLine("Count: " + item.Count.ToString());
+                Console.WriteLine("Color: " + item.Color);
+                Console.WriteLine("Active: " + item.Active);
+                Console.WriteLine("-------------------------------------");
+
+            }
+        }
+
+        /// <summary>
+        /// Draw on image where right clicked
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void image_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
 
