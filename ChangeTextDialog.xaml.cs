@@ -39,8 +39,14 @@ namespace Counter_Wpf
         {
             if (newNameTextBox.Text != "")  // If new name is typed in textbox
             {
-                NewName = newNameTextBox.Text.ToString();
+                string userInput = newNameTextBox.Text.ToString();
+                userInput = userInput.Replace("\n", "").Replace("\r", "").Replace(" ", "");  // Clean user input (Don't trust the stupid users)
+                NewName = userInput;
                 Close();
+            }
+            else
+            {
+                MessageBox.Show("Please type a name", "No Name Selected");
             }
         }
 
