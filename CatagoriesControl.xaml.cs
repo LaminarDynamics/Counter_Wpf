@@ -57,9 +57,8 @@ namespace Counter_Wpf
             //https://social.msdn.microsoft.com/Forums/vstudio/en-US/5d0f24ce-9ced-4c3d-af83-3c55ea961d1e/close-a-wpf-user-control?forum=wpf    // Can't beleive this worked first try...
         }
 
-        public Catagories CatagoryAdded(int index, string name, int count, bool active)
+        public Catagories CatagoryAdded(int index, string name, int count, string color, bool active)
         {
-            byte[] color = { 25, 255, 255 };
             var newObjectToAdd = new Catagories(index, name, count, color, active);
             indexOfCatagories++;
             return newObjectToAdd;
@@ -71,7 +70,7 @@ namespace Counter_Wpf
             catagoryLabel.Content = currentObject.Name;
             countTextbox.Text = currentObject.Count.ToString();
 
-            colorCircle.Fill = new SolidColorBrush(Color.FromRgb(RandomColor()[0], RandomColor()[1], RandomColor()[2]));
+            //colorCircle.Fill = new SolidColorBrush(Color.FromRgb(RandomColor()[0], RandomColor()[1], RandomColor()[2]));
         }
 
 
@@ -168,5 +167,8 @@ namespace Counter_Wpf
                 MainWindow.CountChanged(count);
             }
         }
+
+
+
     }
 }

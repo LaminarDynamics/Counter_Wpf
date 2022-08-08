@@ -163,20 +163,21 @@ namespace Counter_Wpf
             if (!string.IsNullOrWhiteSpace(setDialog.newNameTextBox.Text))    // Only build crap if user gives a name
             {
                 string userGivenName = setDialog.NewName;
+                SolidColorBrush userSelectedColor = new SolidColorBrush((Color)ColorConverter.ConvertFromString(setDialog.SelectedColor));
                 CatagoriesControl catagoriesControl1 = new CatagoriesControl
                 {
                     //Width = 500
                 };
 
-                catagoriesControl1.colorCircle.Fill = new SolidColorBrush(Colors.Blue);
-                catagoriesControl1.Background = new SolidColorBrush(Colors.Red);
+                catagoriesControl1.colorCircle.Fill = userSelectedColor;
+                catagoriesControl1.Background = userSelectedColor;
                 catagoriesControl1.Name = userGivenName.ToString();
 
                 
 
                 catagories.Children.Add(catagoriesControl1);    // Add to scrolller
 
-                var currentObject = catagoriesControl1.CatagoryAdded(index_of_catagories, userGivenName, 0, true);
+                var currentObject = catagoriesControl1.CatagoryAdded(index_of_catagories, userGivenName, 0, setDialog.SelectedColor, true);
 
           
 
