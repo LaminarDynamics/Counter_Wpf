@@ -251,10 +251,14 @@ namespace Counter_Wpf
             double x = e.GetPosition(myCanvas).X; //get mouse coordinates over canvas
             double y = e.GetPosition(myCanvas).Y;
 
+            // Get color of currently active catagory
+            Catagories activeCatagory = GetActiveCatagory();
+            SolidColorBrush activeColor = new SolidColorBrush((Color)ColorConverter.ConvertFromString(activeCatagory.Color));
+
             Ellipse marker = new Ellipse
             {
                 StrokeThickness = 3,
-                Stroke = Brushes.Red, // Creates hollow circle. Fill instead of Stroke for fill
+                Stroke = activeColor, // Creates hollow circle. Fill instead of Stroke for fill
                 Margin = new Thickness(x - 10, y - 10, 0, 0), // Minus half of width/height to place centered
                 Width = 20,
                 Height = 20
@@ -266,6 +270,24 @@ namespace Counter_Wpf
         public void CountChanged(int new_count)
         {
             //MessageBox.Show("AAAAAAAAAHHHH!!" + new_count.ToString());
+        }
+
+        /// <summary>
+        /// Go through list of objects and return the active one
+        /// </summary>
+        /// <returns>The active catagory</returns>
+        public Catagories GetActiveCatagory()
+        {
+            Catagories activeCatagory = null;
+            foreach (var catagory in listOfCatagoryObjects)
+            {
+                if (catagory.Active == true)
+                {
+                    activeCatagory = catagory;
+                }
+               
+            }
+            return activeCatagory;
         }
     }
 }
