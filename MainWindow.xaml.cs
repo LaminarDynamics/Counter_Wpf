@@ -158,34 +158,63 @@ namespace Counter_Wpf
             ChangeTextDialog setDialog = new ChangeTextDialog();
             setDialog.ShowDialog();
 
-            if (!string.IsNullOrWhiteSpace(setDialog.newNameTextBox.Text))    // Only build crap if user gives a name
+            string userText = setDialog.newNameTextBox.Text.ToString();
+
+            if (!string.IsNullOrWhiteSpace(userText))    // Only build crap if user gives a name
             {
-                CatagoriesControl catagoriesControl1 = new CatagoriesControl();
-                string userGivenName = setDialog.NewName;
-                SolidColorBrush userSelectedColor = new SolidColorBrush((Color)ColorConverter.ConvertFromString(setDialog.SelectedColor));
+                if (CheckIfNameDuplicate(userText) == false)    // Only continue if not already taken
+                {
+                    CatagoriesControl catagoriesControl1 = new CatagoriesControl();
+                    string userGivenName = setDialog.NewName;
+                    SolidColorBrush userSelectedColor = new SolidColorBrush((Color)ColorConverter.ConvertFromString(setDialog.SelectedColor));
 
-                catagoriesControl1.colorCircle.Fill = userSelectedColor;
-                catagoriesControl1.Background = userSelectedColor;
-                catagoriesControl1.Name = userGivenName.ToString();
+                    catagoriesControl1.colorCircle.Fill = userSelectedColor;
+                    catagoriesControl1.Background = userSelectedColor;
+                    catagoriesControl1.Name = userGivenName.ToString();
 
-                catagories.Children.Add(catagoriesControl1);    // Add to scrolller
+                    catagories.Children.Add(catagoriesControl1);    // Add to scrolller
 
-                var currentObject = catagoriesControl1.CatagoryAdded(index_of_catagories, userGivenName, 0, setDialog.SelectedColor, true);
+                    var currentObject = catagoriesControl1.CatagoryAdded(index_of_catagories, userGivenName, 0, setDialog.SelectedColor, true);
 
-                listOfCatagoryObjects.Add(currentObject);   // Add to list of objects
+                    listOfCatagoryObjects.Add(currentObject);   // Add to list of objects
 
-                catagoriesControl1.RestyleControl(currentObject);
-                index_of_catagories++;
-
-
-                SelectedCatagoryChange(catagoriesControl1.Name);    // Changes active object
-                catagoriesControl1.HighlightCatagory(catagoriesControl1.Name); // Changes active hightlighted component
+                    catagoriesControl1.RestyleControl(currentObject);
+                    index_of_catagories++;
 
 
-                // Add control to list
-                listOfCatagoryControls.Add(catagoriesControl1);
+                    SelectedCatagoryChange(catagoriesControl1.Name);    // Changes active object
+                    catagoriesControl1.HighlightCatagory(catagoriesControl1.Name); // Changes active hightlighted component
+
+
+                    // Add control to list
+                    listOfCatagoryControls.Add(catagoriesControl1);
+                }
+
+                else  // If name already used
+                {
+                    MessageBox.Show("That name is already used. \nPlease try another", "Name Duplicate");
+                }
+
             }
 
+        }
+
+        /// <summary>
+        /// Checks if name is already taken in catagories
+        /// </summary>
+        /// <param name="desiredName">The name to check</param>
+        /// <returns>bool true or fasle</returns>
+        private bool CheckIfNameDuplicate(string desiredName)
+        {
+            bool duplicate = false;
+            foreach (var myObject in listOfCatagoryObjects)
+            {
+                if (desiredName == myObject.Name)
+                {
+                    duplicate = true;
+                }
+            }
+            return duplicate;
         }
 
 
@@ -223,10 +252,6 @@ namespace Counter_Wpf
             }
         }
 
-        public void SetAllCatagoriesInactive()
-        {
-
-        }
 
         /// <summary>
         /// Draw on image where right clicked
