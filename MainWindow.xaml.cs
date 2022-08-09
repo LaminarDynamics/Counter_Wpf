@@ -33,10 +33,6 @@ namespace Counter_Wpf
         private int index_of_catagories = 0;
         public static List<Catagories> listOfCatagoryObjects = new List<Catagories>();  // List of Catagory Objects
         public List<CatagoriesControl> listOfCatagoryControls = new List<CatagoriesControl>();  // List of Catagory Controls
-        //public string activeCatagoryName = "";
-
-
-
 
 
         public MainWindow()

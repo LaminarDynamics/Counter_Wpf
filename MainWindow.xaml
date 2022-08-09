@@ -15,7 +15,7 @@
     <Grid>
 
 
-        <Canvas x:Name="myCanvas" Background="Tomato" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,50,0,0" Cursor="None">
+        <Canvas x:Name="myCanvas" Background="Tomato" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,50,0,0" Cursor="None" MouseWheel="image_MouseWheel">
             <Image x:Name="image" Source="photo.JPG" HorizontalAlignment="Left" Height="450" Margin="10,10,10,10" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" MouseWheel="image_MouseWheel" Stretch="Fill" MouseMove="image_MouseMove_1" MouseLeftButtonDown="image_MouseLeftButtonDown" Cursor="Cross" MouseRightButtonDown="image_MouseRightButtonDown"/>
             <!--<Image x:Name="image" Source="photo.JPG" HorizontalAlignment="Left"  Margin="10,10,10,10" VerticalAlignment="Top" MouseWheel="image_MouseWheel" MouseMove="image_MouseMove_1" MouseLeftButtonDown="image_MouseLeftButtonDown" Cursor="Hand" MouseRightButtonDown="image_MouseRightButtonDown" Width="{Binding Path=ActualWidth, ElementName=canvas1}" Height="{Binding Path=ActualHeight, ElementName=canvas1}" Stretch="Uniform"/>-->
 
