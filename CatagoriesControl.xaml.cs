@@ -20,8 +20,6 @@ namespace Counter_Wpf
     /// </summary>
     public partial class CatagoriesControl : UserControl
     {
-        public static int indexOfCatagories = 0;
-
         public MainWindow MainWindow = new MainWindow();
 
         public CatagoriesControl()
@@ -59,7 +57,6 @@ namespace Counter_Wpf
         public Catagories CatagoryAdded(int index, string name, int count, string color, bool active)
         {
             var newObjectToAdd = new Catagories(index, name, count, color, active);
-            indexOfCatagories++;
             return newObjectToAdd;
         }
 
@@ -146,23 +143,6 @@ namespace Counter_Wpf
 
         }
 
-        /// <summary>
-        /// Increments display count of currently active catagory       
-        /// </summary>
-        /// <param name="currentCatagory">The catagory to increment</param>
-        public void IncrementCounter(Catagories currentCatagory)
-        {
-            countTextbox.Text = currentCatagory.Count.ToString();
-            //// Get correct catagory control
-            //foreach (var child in (Parent as StackPanel).Children.OfType<CatagoriesControl>())  // Changed object to var and added OfType stuff. Now it works
-            //{
-            //    if (child.Name != currentCatagory.Name)
-            //    {
-            //        child.countTextbox.Text = currentCatagory.Count.ToString();
-            //    }
-            //}
-        }
-
 
         // Random name for object/control reference
         private static Random random = new Random();
@@ -177,7 +157,12 @@ namespace Counter_Wpf
         {
             if (int.TryParse(countTextbox.Text, out int count)) // See if textbox only contains numbers
             {
-                MainWindow.CountChanged(count);
+                //MainWindow.CountChanged(count);
+                MainWindow.SelectedCatagoryChange("");
+            }
+            else
+            {
+                MessageBox.Show("Please enter a number", "Entry not a number");
             }
         }
 

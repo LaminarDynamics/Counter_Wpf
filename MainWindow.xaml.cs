@@ -190,7 +190,7 @@ namespace Counter_Wpf
 
 
         /// <summary>
-        /// Set which object is active
+        /// Set which object is active. Sets all to false if no catagory received
         /// </summary>
         /// <param name="receivedActiveCatagory">Name of object to activate</param>
         public void SelectedCatagoryChange(string receivedActiveCatagory)
@@ -223,6 +223,11 @@ namespace Counter_Wpf
             }
         }
 
+        public void SetAllCatagoriesInactive()
+        {
+
+        }
+
         /// <summary>
         /// Draw on image where right clicked
         /// </summary>
@@ -236,28 +241,33 @@ namespace Counter_Wpf
 
             // Get color of currently active catagory
             Catagories activeCatagory = GetActiveCatagory();
-            SolidColorBrush activeColor = new SolidColorBrush((Color)ColorConverter.ConvertFromString(activeCatagory.Color));
 
-            Ellipse marker = new Ellipse
+            if (activeCatagory != null) // Only add points if catagory is selected
             {
-                StrokeThickness = 3,
-                Stroke = activeColor, // Creates hollow circle. Fill instead of Stroke for fill
-                Margin = new Thickness(x - 10, y - 10, 0, 0), // Minus half of width/height to place centered
-                Width = 20,
-                Height = 20
-            };
-            myCanvas.Children.Add(marker);
-            activeCatagory.Count++;
+                SolidColorBrush activeColor = new SolidColorBrush((Color)ColorConverter.ConvertFromString(activeCatagory.Color));
 
-            CatagoriesControl currentControl = listOfCatagoryControls[activeCatagory.Index];    // Get index of active control
-            currentControl.countTextbox.Text = activeCatagory.Count.ToString(); // Update active control
+                Ellipse marker = new Ellipse
+                {
+                    StrokeThickness = 3,
+                    Stroke = activeColor, // Creates hollow circle. Fill instead of Stroke for fill
+                    Margin = new Thickness(x - 10, y - 10, 0, 0), // Minus half of width/height to place centered
+                    Width = 20,
+                    Height = 20
+                };
+                myCanvas.Children.Add(marker);
+                activeCatagory.Count++;
+
+                CatagoriesControl currentControl = listOfCatagoryControls[activeCatagory.Index];    // Get index of active control
+                currentControl.countTextbox.Text = activeCatagory.Count.ToString(); // Update active control
+            }
+            else
+            {
+                MessageBox.Show("Please select or add a catagory", "No catagory selected");
+            }
+
         }
 
 
-        public void CountChanged(int new_count)
-        {
-            //MessageBox.Show("AAAAAAAAAHHHH!!" + new_count.ToString());
-        }
 
         /// <summary>
         /// Go through list of objects and return the active one
