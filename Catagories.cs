@@ -18,7 +18,6 @@ namespace Counter_Wpf
             this.active = active;
         }
 
-
         private int index;
 
         public int Index

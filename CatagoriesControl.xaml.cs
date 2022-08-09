@@ -33,7 +33,6 @@ namespace Counter_Wpf
         {
             countTextbox.IsReadOnly = false;
             countTextbox.Background = Brushes.Red;
-
         }
 
         private void countTextbox_MouseLeave(object sender, MouseEventArgs e) // After changing count manually
@@ -66,11 +65,8 @@ namespace Counter_Wpf
 
         public void RestyleControl(Catagories currentObject)
         {
-            Console.WriteLine(currentObject.Color);
             catagoryLabel.Content = currentObject.Name;
             countTextbox.Text = currentObject.Count.ToString();
-
-            //colorCircle.Fill = new SolidColorBrush(Color.FromRgb(RandomColor()[0], RandomColor()[1], RandomColor()[2]));
         }
 
 
@@ -148,6 +144,23 @@ namespace Counter_Wpf
 
             }
 
+        }
+
+        /// <summary>
+        /// Increments display count of currently active catagory       
+        /// </summary>
+        /// <param name="currentCatagory">The catagory to increment</param>
+        public void IncrementCounter(Catagories currentCatagory)
+        {
+            countTextbox.Text = currentCatagory.Count.ToString();
+            //// Get correct catagory control
+            //foreach (var child in (Parent as StackPanel).Children.OfType<CatagoriesControl>())  // Changed object to var and added OfType stuff. Now it works
+            //{
+            //    if (child.Name != currentCatagory.Name)
+            //    {
+            //        child.countTextbox.Text = currentCatagory.Count.ToString();
+            //    }
+            //}
         }
 
 

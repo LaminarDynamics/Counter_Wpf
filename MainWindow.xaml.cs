@@ -31,8 +31,10 @@ namespace Counter_Wpf
 
 
         private int index_of_catagories = 0;
-        public static List<Catagories> listOfCatagoryObjects = new List<Catagories>();
-        public string activeCatagoryName = "";
+        public static List<Catagories> listOfCatagoryObjects = new List<Catagories>();  // List of Catagory Objects
+        public List<CatagoriesControl> listOfCatagoryControls = new List<CatagoriesControl>();  // List of Catagory Controls
+        //public string activeCatagoryName = "";
+
 
 
 
@@ -162,38 +164,19 @@ namespace Counter_Wpf
 
             if (!string.IsNullOrWhiteSpace(setDialog.newNameTextBox.Text))    // Only build crap if user gives a name
             {
+                CatagoriesControl catagoriesControl1 = new CatagoriesControl();
                 string userGivenName = setDialog.NewName;
                 SolidColorBrush userSelectedColor = new SolidColorBrush((Color)ColorConverter.ConvertFromString(setDialog.SelectedColor));
-                CatagoriesControl catagoriesControl1 = new CatagoriesControl
-                {
-                    //Width = 500
-                };
 
                 catagoriesControl1.colorCircle.Fill = userSelectedColor;
                 catagoriesControl1.Background = userSelectedColor;
                 catagoriesControl1.Name = userGivenName.ToString();
 
-                
-
                 catagories.Children.Add(catagoriesControl1);    // Add to scrolller
 
                 var currentObject = catagoriesControl1.CatagoryAdded(index_of_catagories, userGivenName, 0, setDialog.SelectedColor, true);
 
-          
-
                 listOfCatagoryObjects.Add(currentObject);   // Add to list of objects
-
-                //foreach (var item in listOfCatagoryObjects)
-                //{
-
-                //    Console.WriteLine("Index: " + item.Index.ToString());
-                //    Console.WriteLine("Name: " + item.Name);
-                //    Console.WriteLine("Count: " + item.Count.ToString());
-                //    Console.WriteLine("Color: " + item.Color);
-                //    Console.WriteLine("-------------------------------------");
-
-                //}
-
 
                 catagoriesControl1.RestyleControl(currentObject);
                 index_of_catagories++;
@@ -201,6 +184,10 @@ namespace Counter_Wpf
 
                 SelectedCatagoryChange(catagoriesControl1.Name);    // Changes active object
                 catagoriesControl1.HighlightCatagory(catagoriesControl1.Name); // Changes active hightlighted component
+
+
+                // Add control to list
+                listOfCatagoryControls.Add(catagoriesControl1);
             }
 
         }
@@ -264,6 +251,10 @@ namespace Counter_Wpf
                 Height = 20
             };
             myCanvas.Children.Add(marker);
+            activeCatagory.Count++;
+
+            CatagoriesControl currentControl = listOfCatagoryControls[activeCatagory.Index];    // Get index of active control
+            currentControl.countTextbox.Text = activeCatagory.Count.ToString(); // Update active control
         }
 
 
