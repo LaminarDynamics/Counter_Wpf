@@ -272,7 +272,7 @@ namespace Counter_Wpf
                 {
                     activeCatagory = catagory;
                 }
-               
+
             }
             return activeCatagory;
         }
