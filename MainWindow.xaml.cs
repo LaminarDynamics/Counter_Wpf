@@ -159,8 +159,11 @@ namespace Counter_Wpf
             setDialog.ShowDialog();
 
             string userText = setDialog.newNameTextBox.Text.ToString();
+            char firstLetter = userText[0];
+            // Check follows name convention (Not starting with number)
+            bool validName = firstLetter.ToString().Any(x => char.IsLetter(x)); // Check if first character is a letter
 
-            if (!string.IsNullOrWhiteSpace(userText))    // Only build crap if user gives a name
+            if (!string.IsNullOrWhiteSpace(userText) && validName)    // Only build crap if user gives a name
             {
                 if (CheckIfNameDuplicate(userText) == false)    // Only continue if not already taken
                 {
@@ -195,6 +198,11 @@ namespace Counter_Wpf
                     MessageBox.Show("That name is already used. \nPlease try another", "Name Duplicate");
                 }
 
+            }
+
+            else // Name is invalid
+            {
+                MessageBox.Show("That is not a valid name. Names must begin with a letter. \nPlease try again.", "Invalid Name");
             }
 
         }
