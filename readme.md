@@ -17,4 +17,4 @@ Attempting to create an application where one can view a photo and then zoom in 
 - [x] Scroll zoom doesn't work while cursor over placed dot
 
 # Screenshot as of 8-8-22
-![image](Source_Images/sample.png)
+![image](Source_Images/sample2.png)
