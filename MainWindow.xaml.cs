@@ -28,6 +28,7 @@ namespace Counter_Wpf
         private Point start;
         private Point canvas_translate_amount;
         private Point mouse_pos;
+        private Point canvas_dimensions;
 
 
         private int index_of_catagories = 0;
@@ -75,20 +76,34 @@ namespace Counter_Wpf
             // Scale Image to fit canvas
             image.Width = myCanvas.Width;
             image.Height = myCanvas.Height;
+
+            canvas_dimensions.X = image.Width;
+            canvas_dimensions.Y = image.Height;
+
         }
 
         private void image_MouseWheel(object sender, MouseWheelEventArgs e) // Mousewheel Zoom
         {
+            mouse_pos = e.MouseDevice.GetPosition(image);
+
             // Zoom controls
             double zoom_speed = .5;
             if (e.Delta > 0) // Zoom in 
             {
                 image_zoom += zoom_speed;
+                canvas_translate_amount.X = (canvas_dimensions.X / 7) - mouse_pos.X;
+                canvas_translate_amount.Y = (canvas_dimensions.X / 7) - mouse_pos.Y;
             }
             if (e.Delta < 0 && image_zoom >= 1 + zoom_speed) // Zoom out (Only if already zoomed in)
             {
                 image_zoom -= zoom_speed;
+                //canvas_translate_amount.X = (canvas_dimensions.X / 7) + mouse_pos.X;
+                //canvas_translate_amount.Y = (canvas_dimensions.X / 7) + mouse_pos.Y;
             }
+
+
+
+
             ChangeTranslationAndZoom();
             slider.Value = image_zoom;
         }
