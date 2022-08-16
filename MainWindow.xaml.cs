@@ -163,7 +163,7 @@ namespace Counter_Wpf
 
         private void button_Click(object sender, RoutedEventArgs e)
         {
-
+            
 
         }
 
@@ -192,7 +192,8 @@ namespace Counter_Wpf
 
                     catagories.Children.Add(catagoriesControl1);    // Add to scrolller
 
-                    var currentObject = catagoriesControl1.CatagoryAdded(index_of_catagories, userGivenName, 0, setDialog.SelectedColor, true);
+                    List<Point> locations = new List<Point>();
+                    var currentObject = catagoriesControl1.CatagoryAdded(index_of_catagories, userGivenName, 0, setDialog.SelectedColor, locations, true);
 
                     listOfCatagoryObjects.Add(currentObject);   // Add to list of objects
 
@@ -268,6 +269,7 @@ namespace Counter_Wpf
                 Console.WriteLine("Index: " + item.Index.ToString());
                 Console.WriteLine("Name: " + item.Name);
                 Console.WriteLine("Count: " + item.Count.ToString());
+                Console.WriteLine("Points: " + item.Locations);
                 Console.WriteLine("Color: " + item.Color);
                 Console.WriteLine("Active: " + item.Active);
                 Console.WriteLine("-------------------------------------");
@@ -286,6 +288,8 @@ namespace Counter_Wpf
 
             double x = e.GetPosition(myCanvas).X; //get mouse coordinates over canvas
             double y = e.GetPosition(myCanvas).Y;
+            mouse_pos.X = x;
+            mouse_pos.Y = y;
 
             // Get color of currently active catagory
             Catagories activeCatagory = GetActiveCatagory();
@@ -304,6 +308,9 @@ namespace Counter_Wpf
                 };
                 myCanvas.Children.Add(marker);
                 activeCatagory.Count++;
+
+                
+                activeCatagory.Locations.Add(mouse_pos);
 
                 CatagoriesControl currentControl = listOfCatagoryControls[activeCatagory.Index];    // Get index of active control
                 currentControl.countTextbox.Text = activeCatagory.Count.ToString(); // Update active control
@@ -335,4 +342,7 @@ namespace Counter_Wpf
             return activeCatagory;
         }
     }
+
+
+   
 }

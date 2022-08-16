@@ -54,9 +54,9 @@ namespace Counter_Wpf
             //https://social.msdn.microsoft.com/Forums/vstudio/en-US/5d0f24ce-9ced-4c3d-af83-3c55ea961d1e/close-a-wpf-user-control?forum=wpf    // Can't beleive this worked first try...
         }
 
-        public Catagories CatagoryAdded(int index, string name, int count, string color, bool active)
+        public Catagories CatagoryAdded(int index, string name, int count, string color, List<Point> locations, bool active)
         {
-            var newObjectToAdd = new Catagories(index, name, count, color, active);
+            var newObjectToAdd = new Catagories(index, name, count, locations, color, active);
             return newObjectToAdd;
         }
 

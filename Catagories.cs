@@ -3,17 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Counter_Wpf
 {
     public class Catagories
     {
        
-        public Catagories(int index, string name, int count, string color, bool active)
+        public Catagories(int index, string name, int count, List<Point> locations, string color, bool active)
         {
             this.index = index;
             this.name = name;
             this.count = count;
+            this.locations = locations;
             this.color = color;
             this.active = active;
         }
@@ -41,6 +43,15 @@ namespace Counter_Wpf
             get { return count; }
             set { count = value; }
         }
+
+        private List<Point> locations;
+
+        public List<Point> Locations
+        {
+            get { return locations; }
+            set { locations = value; }
+        }
+
 
         private string color;
 
