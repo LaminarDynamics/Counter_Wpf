@@ -16,7 +16,7 @@
 
 
         <Canvas x:Name="myCanvas" Background="Tomato" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,50,0,0" Cursor="None" MouseWheel="image_MouseWheel">
-            <Image x:Name="image" Source="photo.JPG" HorizontalAlignment="Left" Height="450" Margin="10,10,10,10" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" MouseWheel="image_MouseWheel" Stretch="Fill" MouseMove="image_MouseMove_1" MouseLeftButtonDown="image_MouseLeftButtonDown" Cursor="Cross" MouseRightButtonDown="image_MouseRightButtonDown"/>
+            <Image x:Name="image" HorizontalAlignment="Left" Height="450" Margin="10,10,10,10" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" MouseWheel="image_MouseWheel" Stretch="Fill" MouseMove="image_MouseMove_1" MouseLeftButtonDown="image_MouseLeftButtonDown" Cursor="Cross" MouseRightButtonDown="image_MouseRightButtonDown"/>
             <!--<Image x:Name="image" Source="photo.JPG" HorizontalAlignment="Left"  Margin="10,10,10,10" VerticalAlignment="Top" MouseWheel="image_MouseWheel" MouseMove="image_MouseMove_1" MouseLeftButtonDown="image_MouseLeftButtonDown" Cursor="Hand" MouseRightButtonDown="image_MouseRightButtonDown" Width="{Binding Path=ActualWidth, ElementName=canvas1}" Height="{Binding Path=ActualHeight, ElementName=canvas1}" Stretch="Uniform"/>-->
 
         </Canvas>
@@ -48,11 +48,12 @@
                 </LinearGradientBrush>
             </Grid.Background>
 
-            <Button x:Name="button" Content="Button" HorizontalAlignment="Left" Height="24" Margin="24,10,0,0" VerticalAlignment="Top" Width="100" Click="button_Click"/>
+            <Button x:Name="saveBtn" Content="Save" HorizontalAlignment="Left" Height="24" Margin="24,10,0,0" VerticalAlignment="Top" Width="100" Click="save_Btn_Click"/>
             <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="49" Margin="14,39,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="138"/>
 
         </Grid>
         <Button x:Name="centerButton" Content="Re-Center" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="75" Click="centerButton_Click" FontSize="14"/>
+        <Button x:Name="load_btn" Content="Add Image" HorizontalAlignment="Left" Height="22" Margin="10,10,0,0" VerticalAlignment="Top" Width="75"/>
 
     </Grid>
 </Window>

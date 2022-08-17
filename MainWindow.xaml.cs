@@ -30,6 +30,9 @@ namespace Counter_Wpf
         private Point mouse_pos;
         private Point canvas_dimensions;
 
+        //private string imagePath = "C:\\Users\\Owner-PC\\Documents\\AcerProgramProjects\\ProgramProjects\\C#_Projects\\CS Image\\Counter_Thing\\Dot_Counter_Wpf\\Counter_Wpf\\photo.JPG";
+        //private string imagePath = "C:\\Users\\Owner-PC\\Documents\\AcerProgramProjects\\ProgramProjects\\C#_Projects\\CS Image\\Counter_Thing\\Dot_Counter_Wpf\\Counter_Wpf\\Source_Images\\sample2.png";
+        private string imagePath;
 
         private int index_of_catagories = 0;
         public static List<Catagories> listOfCatagoryObjects = new List<Catagories>();  // List of Catagory Objects
@@ -41,6 +44,23 @@ namespace Counter_Wpf
         public MainWindow()
         {
             InitializeComponent();
+
+            // Configure open file dialog box
+            var dialog = new Microsoft.Win32.OpenFileDialog();
+
+            dialog.FileName = "Photo"; // Default file name
+            dialog.DefaultExt = ".jpg"; // Default file extension
+            dialog.Filter = "Image files (*.bmp, *.jpg, *.png)|*.bmp;*.jpg;*.png|All files (*.*)|*.*"; // Filter files by extension
+
+            // Show open file dialog box
+            bool? result = dialog.ShowDialog();
+
+            // Process save file dialog box results
+            if (result == true)
+            {
+                // Open 
+                imagePath = dialog.FileName;
+            }
         }
 
         protected override void OnClosed(EventArgs e)   // Need this to make closing the program work right after CatagoriesControls added
@@ -51,36 +71,51 @@ namespace Counter_Wpf
 
         private void Window_Loaded(object sender, RoutedEventArgs e)    // Manual scaling for dynamic sizing (Hopefully)
         {
-            // Get screen size to dynamically size components
-            double screen_width = SystemParameters.PrimaryScreenWidth;
-            double screen_height = SystemParameters.PrimaryScreenHeight;
+          
+            try
+            {
+                image.Source = new BitmapImage(new Uri(imagePath));
+
+                // Get screen size to dynamically size components
+                double screen_width = SystemParameters.PrimaryScreenWidth;
+                double screen_height = SystemParameters.PrimaryScreenHeight;
+
+                load_btn.Visibility = Visibility.Collapsed; // Hide Load button
+
+                // Scale canvas
+                double canvas_scale_width = .75;
+                myCanvas.Width = screen_width * canvas_scale_width;
+
+                // Sidebar scaling
+                groupBox.Height = screen_height * .5;
+                groupBox.Width = (screen_width - myCanvas.Width) * .97;
+
+                // Slider scaling
+                slider.Height = screen_height * .95;
+                slider.Margin = new Thickness(myCanvas.Width - groupBox.Width, 0, 0, 0);
+
+                // Scroller scaling
+                scrollViewer.Height = screen_height * .5;
+
+                // Bottom right grid scaling
+                bottom_right_grid.Height = (screen_height - scrollViewer.Height) * .9;
+                bottom_right_grid.Width = (screen_width - myCanvas.Width) * .97;
+
+                // Scale Image to fit canvas
+                image.Width = myCanvas.Width;
+                image.Height = myCanvas.Height;
+
+                canvas_dimensions.X = image.Width;
+                canvas_dimensions.Y = image.Height;
+            }
 
 
-            // Scale canvas
-            double canvas_scale_width = .75;
-            myCanvas.Width = screen_width * canvas_scale_width;
 
-            // Sidebar scaling
-            groupBox.Height = screen_height * .5;
-            groupBox.Width = (screen_width - myCanvas.Width) * .97;
+            catch (Exception)
+            {
+                MessageBox.Show("There was an error loading the image.\nPlease try again.", "Error");
+            }
 
-            // Slider scaling
-            slider.Height = screen_height * .95;
-            slider.Margin = new Thickness(myCanvas.Width - groupBox.Width, 0, 0, 0);
-
-            // Scroller scaling
-            scrollViewer.Height = screen_height * .5;
-
-            // Bottom right grid scaling
-            bottom_right_grid.Height = (screen_height - scrollViewer.Height) * .9;
-            bottom_right_grid.Width = (screen_width - myCanvas.Width) * .97;
-
-            // Scale Image to fit canvas
-            image.Width = myCanvas.Width;
-            image.Height = myCanvas.Height;
-
-            canvas_dimensions.X = image.Width;
-            canvas_dimensions.Y = image.Height;
 
         }
 
@@ -163,7 +198,7 @@ namespace Counter_Wpf
             ChangeTranslationAndZoom();
         }
 
-        private void button_Click(object sender, RoutedEventArgs e)
+        private void save_Btn_Click(object sender, RoutedEventArgs e)
         {
             // Configure open file dialog box
             //var dialog = new Microsoft.Win32.OpenFileDialog();
@@ -179,9 +214,9 @@ namespace Counter_Wpf
             // Process save file dialog box results
             if (result == true)
             {
-                // Save document
+                // Save 
                 string filename = dialog.FileName;
-                saveFile.SavePhoto(filename, listOfCatagoryObjects, GetActiveCatagory());
+                saveFile.SavePhoto(filename, listOfCatagoryObjects, imagePath);
             }
 
         }

@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media.Imaging;
 using System.Xml;
 using System.Xml.Serialization;
 
@@ -17,14 +18,48 @@ namespace Counter_Wpf
         /// <param name="fileName">User selected file name</param>
         /// <param name="allCatagories">List of all catagories</param>
         /// <param name="activeCatagories">The currently active catagory</param>
-        public void SavePhoto(string fileName, List<Catagories> allCatagories, Catagories activeCatagory)
+        public void SavePhoto(string fileName, List<Catagories> allCatagories, string imageUrl)
         {
-            // Compile .exif stuff
-            string xml = "";
+            // Get xml
+            string xml = CreateXml(allCatagories);
+
+            // Alter .exif
+            var source = BitmapFrame.Create(new Uri(imageUrl));
+            var metadata = (BitmapMetadata)source.Metadata;
+
+            var daClone = source.Clone();   // Make clone so I can edit things
+            var cloneMeta = metadata.Clone();   // Make clone of metadata
+
+            cloneMeta.Comment = xml;
+
+            var bmp = new WriteableBitmap(daClone);
+            bmp.Lock();
+            // magick
+            bmp.Unlock();
+
+            var target = BitmapFrame.Create(bmp, null, cloneMeta, null); // here
+            var encoder = new JpegBitmapEncoder();
+            encoder.Frames.Add(target);
+            using (var stream = File.OpenWrite(fileName))
+            {
+                encoder.Save(stream);
+            }
+
+
+
+            // Save to file
+            //File.WriteAllText(fileName, xml);
+            Console.WriteLine(xml);
+        }
+
+        /// <summary>
+        /// Creates a .xml string to save
+        /// </summary>
+        /// <param name="allCatagories"></param>
+        /// <returns></returns>
+        private string CreateXml(List<Catagories> allCatagories)
+        {
             string header = $"<objects count='{allCatagories.Count}'";
-
-
-
 
             // Add each object
             foreach (var catagory in allCatagories)
@@ -48,12 +83,18 @@ namespace Counter_Wpf
                 header += objectXml;
             }
 
-            xml = header + "</objects>";
-
-            // Save to file
-            File.WriteAllText(fileName, xml);
-            Console.WriteLine(xml);
+            // Compile .exif stuff
+            string xml = header + "</objects>";
+            return xml;
         }
+
+
+
+        private void InsertXmlToExif()
+        {
+
+        }
+
 
     }
 }
