@@ -35,6 +35,8 @@ namespace Counter_Wpf
         public static List<Catagories> listOfCatagoryObjects = new List<Catagories>();  // List of Catagory Objects
         public List<CatagoriesControl> listOfCatagoryControls = new List<CatagoriesControl>();  // List of Catagory Controls
 
+        private SaveFile saveFile = new SaveFile();
+
 
         public MainWindow()
         {
@@ -163,7 +165,24 @@ namespace Counter_Wpf
 
         private void button_Click(object sender, RoutedEventArgs e)
         {
-            
+            // Configure open file dialog box
+            //var dialog = new Microsoft.Win32.OpenFileDialog();
+            var dialog = new Microsoft.Win32.SaveFileDialog();
+
+            dialog.FileName = "Photo"; // Default file name
+            dialog.DefaultExt = ".jpg"; // Default file extension
+            dialog.Filter = "Image files (*.bmp, *.jpg, *.png)|*.bmp;*.jpg;*.png|All files (*.*)|*.*"; // Filter files by extension
+
+            // Show open file dialog box
+            bool? result = dialog.ShowDialog();
+
+            // Process save file dialog box results
+            if (result == true)
+            {
+                // Save document
+                string filename = dialog.FileName;
+                saveFile.SavePhoto(filename, listOfCatagoryObjects, GetActiveCatagory());
+            }
 
         }
 
@@ -174,9 +193,14 @@ namespace Counter_Wpf
             setDialog.ShowDialog();
 
             string userText = setDialog.newNameTextBox.Text.ToString();
-            char firstLetter = userText[0];
-            // Check follows name convention (Not starting with number)
-            bool validName = firstLetter.ToString().Any(x => char.IsLetter(x)); // Check if first character is a letter
+
+            bool validName = false;
+            if (userText != "") // Fix bug
+            {
+                char firstLetter = userText[0]; // Check follows name convention (Not starting with number)
+                validName = firstLetter.ToString().Any(x => char.IsLetter(x)); // Check if first character is a letter
+            }
+
 
             if (!string.IsNullOrWhiteSpace(userText) && validName)    // Only build crap if user gives a name
             {
@@ -309,7 +333,7 @@ namespace Counter_Wpf
                 myCanvas.Children.Add(marker);
                 activeCatagory.Count++;
 
-                
+
                 activeCatagory.Locations.Add(mouse_pos);
 
                 CatagoriesControl currentControl = listOfCatagoryControls[activeCatagory.Index];    // Get index of active control
@@ -341,8 +365,12 @@ namespace Counter_Wpf
             }
             return activeCatagory;
         }
+
+
+
+
     }
 
 
-   
+
 }
