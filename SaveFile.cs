@@ -42,7 +42,7 @@ namespace Counter_Wpf
                     $"<count>{catagory.Count}</count>\n" +
                     $"<locations>{stringPoints}</locations>\n" +
                     $"<color>{catagory.Color}</color>\n" +
-                    $"<active>{catagory.Active}</active>\n " +
+                    $"<active>{catagory.Active}</active>\n" +
                     $"</object>\n\n";
 
                 header += objectXml;
