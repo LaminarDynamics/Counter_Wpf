@@ -10,7 +10,7 @@ using System.Windows;
 [assembly: AssemblyTitle("Counter_Wpf")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("LaminarDynamics")]
 [assembly: AssemblyProduct("Counter_Wpf")]
 [assembly: AssemblyCopyright("Copyright ©  2022")]
 [assembly: AssemblyTrademark("")]

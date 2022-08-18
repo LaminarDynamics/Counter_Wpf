@@ -325,7 +325,7 @@ namespace Counter_Wpf
                 {
                     currentCatagory.Active = true;
                 }
-                
+
                 else
                 {
                     currentCatagory.Active = false;
@@ -409,42 +409,45 @@ namespace Counter_Wpf
             var metadata = (BitmapMetadata)source.Metadata;
 
             string substring = "<objects";
-            if (metadata.Comment != null && metadata.Comment.StartsWith(substring))   // Only load everything if proper meta exists and is proper
+            if (metadata != null)   // Check if any metadata is there
             {
-                // Create Objects from metadata
-                listOfCatagoryObjects = openFile.CreateObjects(metadata);
-
-                foreach (var catagory in listOfCatagoryObjects)
+                if (metadata.Comment != null && metadata.Comment.StartsWith(substring))   // Only load everything if proper meta exists and is proper
                 {
-                    // Build objects onscreen
-                    CatagoriesControl catagoriesControl1 = new CatagoriesControl();
-                    string userGivenName = catagory.Name;
-                    SolidColorBrush userSelectedColor = new SolidColorBrush((Color)ColorConverter.ConvertFromString(catagory.Color));
+                    // Create Objects from metadata
+                    listOfCatagoryObjects = openFile.CreateObjects(metadata);
 
-                    catagoriesControl1.colorCircle.Fill = userSelectedColor;
-                    catagoriesControl1.Background = userSelectedColor;
-                    catagoriesControl1.Name = userGivenName.ToString();
+                    foreach (var catagory in listOfCatagoryObjects)
+                    {
+                        // Build objects onscreen
+                        CatagoriesControl catagoriesControl1 = new CatagoriesControl();
+                        string userGivenName = catagory.Name;
+                        SolidColorBrush userSelectedColor = new SolidColorBrush((Color)ColorConverter.ConvertFromString(catagory.Color));
 
-                    catagories.Children.Add(catagoriesControl1);    // Add to scrolller
+                        catagoriesControl1.colorCircle.Fill = userSelectedColor;
+                        catagoriesControl1.Background = userSelectedColor;
+                        catagoriesControl1.Name = userGivenName.ToString();
 
-                    //List<Point> locations = new List<Point>();
-                    var currentObject = catagoriesControl1.CatagoryAdded(index_of_catagories, userGivenName, catagory.Count, catagory.Color, catagory.Locations, true);
+                        catagories.Children.Add(catagoriesControl1);    // Add to scrolller
 
-                    //listOfCatagoryObjects.Add(currentObject);   // Add to list of objects
+                        //List<Point> locations = new List<Point>();
+                        var currentObject = catagoriesControl1.CatagoryAdded(index_of_catagories, userGivenName, catagory.Count, catagory.Color, catagory.Locations, true);
 
-                    catagoriesControl1.RestyleControl(currentObject);
-                    index_of_catagories++;
+                        //listOfCatagoryObjects.Add(currentObject);   // Add to list of objects
 
-
-                    SelectedCatagoryChange(catagoriesControl1.Name);    // Changes active object
-                    catagoriesControl1.HighlightCatagory(catagoriesControl1.Name); // Changes active hightlighted component
+                        catagoriesControl1.RestyleControl(currentObject);
+                        index_of_catagories++;
 
 
-                    // Add control to list
-                    listOfCatagoryControls.Add(catagoriesControl1);
+                        SelectedCatagoryChange(catagoriesControl1.Name);    // Changes active object
+                        catagoriesControl1.HighlightCatagory(catagoriesControl1.Name); // Changes active hightlighted component
 
-                    // Draw the loaded points to the canvas
-                    DrawFromMeta(catagory.Locations, catagory.Color);
+
+                        // Add control to list
+                        listOfCatagoryControls.Add(catagoriesControl1);
+
+                        // Draw the loaded points to the canvas
+                        DrawFromMeta(catagory.Locations, catagory.Color);
+                    }
                 }
             }
         }

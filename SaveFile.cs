@@ -31,7 +31,17 @@ namespace Counter_Wpf
 
 
             var daClone = source.Clone();   // Make clone so I can edit things
-            var cloneMeta = metadata.Clone();   // Make clone of metadata
+            BitmapMetadata cloneMeta;
+            if (metadata == null)
+            {
+                cloneMeta = new BitmapMetadata("jpg");   // Make new metadata
+            }
+            else
+            {
+                cloneMeta = metadata.Clone();   // Make clone of metadata
+            }
+
+
 
             cloneMeta.Comment = xml;
 
@@ -41,7 +51,9 @@ namespace Counter_Wpf
             bmp.Unlock();
 
 
-            BmpBitmapEncoder encoder = new BmpBitmapEncoder();
+            //BmpBitmapEncoder encoder = new BmpBitmapEncoder(); // No meta data?
+            var encoder = new JpegBitmapEncoder();
+
             if (saveOverlay)    // Save photo with points overlayed
             {
                 // render InkCanvas' visual tree to the RenderTargetBitmap
@@ -54,14 +66,13 @@ namespace Counter_Wpf
                 targetBitmap.Render(myCanvas);
 
                 // add the RenderTargetBitmap to a Bitmapencoder
-                
+
                 encoder.Frames.Add(BitmapFrame.Create(targetBitmap));
             }
 
 
 
             var target = BitmapFrame.Create(bmp, null, cloneMeta, null); // here
-            //var encoder = new JpegBitmapEncoder();
             encoder.Frames.Add(target);
             using (var stream = File.OpenWrite(fileName))
             {
