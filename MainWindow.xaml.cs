@@ -29,6 +29,7 @@ namespace Counter_Wpf
         private Point canvas_translate_amount;
         private Point mouse_pos;
         private Point canvas_dimensions;
+        private readonly int circle_size = 8;
 
         //private string imagePath = "C:\\Users\\Owner-PC\\Documents\\AcerProgramProjects\\ProgramProjects\\C#_Projects\\CS Image\\Counter_Thing\\Dot_Counter_Wpf\\Counter_Wpf\\photo.JPG";
         //private string imagePath = "C:\\Users\\Owner-PC\\Documents\\AcerProgramProjects\\ProgramProjects\\C#_Projects\\CS Image\\Counter_Thing\\Dot_Counter_Wpf\\Counter_Wpf\\Source_Images\\sample2.png";
@@ -45,8 +46,6 @@ namespace Counter_Wpf
         public MainWindow()
         {
             InitializeComponent();
-
-
         }
 
         public void OpenFileDialog()
@@ -138,7 +137,7 @@ namespace Counter_Wpf
             mouse_pos = e.MouseDevice.GetPosition(image);
 
             // Zoom controls
-            double zoom_speed = .5;
+            double zoom_speed = .3;
             if (e.Delta > 0) // Zoom in 
             {
                 image_zoom += zoom_speed;
@@ -151,9 +150,6 @@ namespace Counter_Wpf
                 //canvas_translate_amount.X = (canvas_dimensions.X / 7) + mouse_pos.X;
                 //canvas_translate_amount.Y = (canvas_dimensions.X / 7) + mouse_pos.Y;
             }
-
-
-
 
             ChangeTranslationAndZoom();
             slider.Value = image_zoom;
@@ -335,19 +331,6 @@ namespace Counter_Wpf
                 }
             }
 
-            // Test
-            foreach (var item in listOfCatagoryObjects)
-            {
-                Console.WriteLine("Change Detected");
-                Console.WriteLine("Index: " + item.Index.ToString());
-                Console.WriteLine("Name: " + item.Name);
-                Console.WriteLine("Count: " + item.Count.ToString());
-                Console.WriteLine("Points: " + item.Locations);
-                Console.WriteLine("Color: " + item.Color);
-                Console.WriteLine("Active: " + item.Active);
-                Console.WriteLine("-------------------------------------");
-
-            }
         }
 
 
@@ -375,9 +358,9 @@ namespace Counter_Wpf
                 {
                     StrokeThickness = 3,
                     Stroke = activeColor, // Creates hollow circle. Fill instead of Stroke for fill
-                    Margin = new Thickness(x - 10, y - 10, 0, 0), // Minus half of width/height to place centered
-                    Width = 20,
-                    Height = 20
+                    Margin = new Thickness(x - (circle_size / 2), y - (circle_size / 2), 0, 0), // Minus half of width/height to place centered
+                    Width = circle_size,
+                    Height = circle_size
                 };
                 myCanvas.Children.Add(marker);
                 activeCatagory.Count++;
@@ -480,9 +463,9 @@ namespace Counter_Wpf
                 {
                     StrokeThickness = 3,
                     Stroke = activeColor, // Creates hollow circle. Fill instead of Stroke for fill
-                    Margin = new Thickness(pointMarker.X - 10, pointMarker.Y - 10, 0, 0), // Minus half of width/height to place centered
-                    Width = 20,
-                    Height = 20
+                    Margin = new Thickness(pointMarker.X - (circle_size / 2), pointMarker.Y - (circle_size / 2), 0, 0), // Minus half of width/height to place centered
+                    Width = circle_size,
+                    Height = circle_size
                 };
                 myCanvas.Children.Add(marker);
             }

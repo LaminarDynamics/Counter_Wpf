@@ -67,41 +67,7 @@ namespace Counter_Wpf
         }
 
 
-        public byte[] RandomColor()
-        {
-
-            var rnd = new Random();
-            int number = rnd.Next(5);
-
-            switch (number)
-            {
-                case 0:
-                    byte[] color0 = { 0, 163, 44 }; // Green
-                    return color0;
-
-                case 1:
-                    byte[] color1 = { 0, 11, 163 }; // Blue
-                    return color1;
-
-                case 2:
-                    byte[] color2 = { 163, 0, 0 }; // Red
-                    return color2;
-
-                case 3:
-                    byte[] color3 = { 163, 0, 158 }; // Purple
-                    return color3;
-
-                case 4:
-                    byte[] color4 = { 209, 125, 23 }; // Orange
-                    return color4;
-
-                default:
-                    byte[] color5 = { 0, 0, 0 };
-                    return color5;
-            }
-
-        }
-
+        
         private void catagoryRect_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)    // Set active catagory and change colors
         {
             // Set all backgrounds the same
@@ -143,16 +109,7 @@ namespace Counter_Wpf
 
         }
 
-
-        // Random name for object/control reference
-        private static Random random = new Random();
-        public string RandomString(int length)
-        {
-            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-            return new string(Enumerable.Repeat(chars, length)
-                .Select(s => s[random.Next(s.Length)]).ToArray());
-        }
-
+       
         private void CountChangedManually()
         {
             if (int.TryParse(countTextbox.Text, out int count)) // See if textbox only contains numbers
@@ -165,8 +122,6 @@ namespace Counter_Wpf
                 MessageBox.Show("Please enter a number", "Entry not a number");
             }
         }
-
-
 
     }
 }
