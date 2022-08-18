@@ -31,8 +31,6 @@ namespace Counter_Wpf
         private Point canvas_dimensions;
         private readonly int circle_size = 8;
 
-        //private string imagePath = "C:\\Users\\Owner-PC\\Documents\\AcerProgramProjects\\ProgramProjects\\C#_Projects\\CS Image\\Counter_Thing\\Dot_Counter_Wpf\\Counter_Wpf\\photo.JPG";
-        //private string imagePath = "C:\\Users\\Owner-PC\\Documents\\AcerProgramProjects\\ProgramProjects\\C#_Projects\\CS Image\\Counter_Thing\\Dot_Counter_Wpf\\Counter_Wpf\\Source_Images\\sample2.png";
         private string imagePath;
 
         private int index_of_catagories = 0;

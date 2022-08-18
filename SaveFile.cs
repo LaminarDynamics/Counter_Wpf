@@ -45,11 +45,6 @@ namespace Counter_Wpf
                 encoder.Save(stream);
             }
 
-
-
-            // Save to file
-            //File.WriteAllText(fileName, xml);
-            Console.WriteLine(xml);
         }
 
         /// <summary>

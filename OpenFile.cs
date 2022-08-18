@@ -34,11 +34,6 @@ namespace Counter_Wpf
 
             string lastType = "";
 
-
-            //XDocument xmlDoc = XDocument.Parse(myMetadata.Comment);
-            //var val = xmlDoc.Descendants("objects").Attributes("object").FirstOrDefault(); ;
-
-
             XmlReader mine = XmlReader.Create(new StringReader(myMetadata.Comment.ToString()));
            
             int numberOfObjects = 0;
@@ -108,7 +103,7 @@ namespace Counter_Wpf
                     // Reset variables
                     index = 0;
                     name = "";
-                    count = 0;////////////////////////////////////////////////////////////////////////////////////
+                    count = 0;
                     locations.Clear();
                     color = "";
                     active = false;
@@ -147,22 +142,6 @@ namespace Counter_Wpf
             }
             return listOfPoints;
         }
-
-
-
-
-        ///// <summary>
-        ///// Check if metadata is in proper format
-        ///// </summary>
-        ///// <param name="meta">Metadata to check</param>
-        ///// <returns></returns>
-        //private bool IsValidMeta(BitmapMetadata meta)
-        //{
-
-        //}
-
-
-
 
     }
 }
