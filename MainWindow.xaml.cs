@@ -44,6 +44,7 @@ namespace Counter_Wpf
         public MainWindow()
         {
             InitializeComponent();
+            textBox.Visibility = Visibility.Collapsed;
         }
 
         public void OpenFileDialog()
