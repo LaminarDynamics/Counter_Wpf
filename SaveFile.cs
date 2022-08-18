@@ -89,12 +89,5 @@ namespace Counter_Wpf
         }
 
 
-
-        private void InsertXmlToExif()
-        {
-
-        }
-
-
     }
 }

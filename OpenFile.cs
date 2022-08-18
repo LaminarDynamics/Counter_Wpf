@@ -30,6 +30,7 @@ namespace Counter_Wpf
         public List<Catagories> CreateObjects(BitmapMetadata myMetadata)
         {
             List<Catagories> readCatagories = new List<Catagories>();
+            List<Point> locations = new List<Point>();
 
             string lastType = "";
 
@@ -100,8 +101,17 @@ namespace Counter_Wpf
                 if (mine.NodeType == XmlNodeType.EndElement && mine.Name == "object" && readCatagories.Count <= numberOfObjects)    // Fires when all data for one object complete
                 {
                     Console.WriteLine();
-                    var newObjectToAdd = new Catagories(index, name, count, locations, color, active);
+                    List<Point> pointsToAdd = new List<Point>(locations); // Need this else newObjectToAdd.points gets cleared out 
+                    var newObjectToAdd = new Catagories(index, name, count, pointsToAdd, color, active);
                     readCatagories.Add(newObjectToAdd);
+
+                    // Reset variables
+                    index = 0;
+                    name = "";
+                    count = 0;////////////////////////////////////////////////////////////////////////////////////
+                    locations.Clear();
+                    color = "";
+                    active = false;
                 }
 
             }
@@ -130,7 +140,7 @@ namespace Counter_Wpf
                     Point thisPoint = new Point
                     {
                         X = Convert.ToInt32(Math.Round(Convert.ToDouble(coords[0]))),   // Change from strings to point
-                        Y = Convert.ToInt32(Math.Round(Convert.ToDouble(coords[0])))
+                        Y = Convert.ToInt32(Math.Round(Convert.ToDouble(coords[1])))
                     };
                     listOfPoints.Add(thisPoint);
                 }

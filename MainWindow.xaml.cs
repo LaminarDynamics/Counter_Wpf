@@ -124,7 +124,7 @@ namespace Counter_Wpf
 
 
                 // Check loaded image for embedded data
-                CheckMetadata(imagePath);
+                LoadMetadata(imagePath);
             }
 
             catch (Exception e)
@@ -416,47 +416,76 @@ namespace Counter_Wpf
         }
 
         /// <summary>
-        /// Check for proper metadata in image .exif to create catagory objects 
+        /// Load metadata in image .exif to create catagory objects 
         /// </summary>
         /// <param name="imagePath">The file path to the current image</param>
-        private void CheckMetadata(string imagePath)
+        private void LoadMetadata(string imagePath)
         {
             var source = BitmapFrame.Create(new Uri(imagePath));
             var metadata = (BitmapMetadata)source.Metadata;
 
-            // Create Objects from metadata
-            listOfCatagoryObjects = openFile.CreateObjects(metadata);
-
-            foreach (var catagory in listOfCatagoryObjects)
+            string substring = "<objects";
+            if (metadata.Comment != null && metadata.Comment.StartsWith(substring))   // Only load everything if proper meta exists and is proper
             {
-                // Build objects onscreen
-                CatagoriesControl catagoriesControl1 = new CatagoriesControl();
-                string userGivenName = catagory.Name;
-                SolidColorBrush userSelectedColor = new SolidColorBrush((Color)ColorConverter.ConvertFromString(catagory.Color));
+                // Create Objects from metadata
+                listOfCatagoryObjects = openFile.CreateObjects(metadata);
 
-                catagoriesControl1.colorCircle.Fill = userSelectedColor;
-                catagoriesControl1.Background = userSelectedColor;
-                catagoriesControl1.Name = userGivenName.ToString();
+                foreach (var catagory in listOfCatagoryObjects)
+                {
+                    // Build objects onscreen
+                    CatagoriesControl catagoriesControl1 = new CatagoriesControl();
+                    string userGivenName = catagory.Name;
+                    SolidColorBrush userSelectedColor = new SolidColorBrush((Color)ColorConverter.ConvertFromString(catagory.Color));
 
-                catagories.Children.Add(catagoriesControl1);    // Add to scrolller
+                    catagoriesControl1.colorCircle.Fill = userSelectedColor;
+                    catagoriesControl1.Background = userSelectedColor;
+                    catagoriesControl1.Name = userGivenName.ToString();
 
-                List<Point> locations = new List<Point>();
-                var currentObject = catagoriesControl1.CatagoryAdded(index_of_catagories, userGivenName, catagory.Count, catagory.Color, locations, true);
+                    catagories.Children.Add(catagoriesControl1);    // Add to scrolller
 
-                //listOfCatagoryObjects.Add(currentObject);   // Add to list of objects
+                    //List<Point> locations = new List<Point>();
+                    var currentObject = catagoriesControl1.CatagoryAdded(index_of_catagories, userGivenName, catagory.Count, catagory.Color, catagory.Locations, true);
 
-                catagoriesControl1.RestyleControl(currentObject);
-                index_of_catagories++;
+                    //listOfCatagoryObjects.Add(currentObject);   // Add to list of objects
 
-
-                SelectedCatagoryChange(catagoriesControl1.Name);    // Changes active object
-                catagoriesControl1.HighlightCatagory(catagoriesControl1.Name); // Changes active hightlighted component
+                    catagoriesControl1.RestyleControl(currentObject);
+                    index_of_catagories++;
 
 
-                // Add control to list
-                listOfCatagoryControls.Add(catagoriesControl1);
+                    SelectedCatagoryChange(catagoriesControl1.Name);    // Changes active object
+                    catagoriesControl1.HighlightCatagory(catagoriesControl1.Name); // Changes active hightlighted component
+
+
+                    // Add control to list
+                    listOfCatagoryControls.Add(catagoriesControl1);
+
+                    // Draw the loaded points to the canvas
+                    DrawFromMeta(catagory.Locations, catagory.Color);
+                }
             }
+        }
+        /// <summary>
+        /// Draw points on images loaded from metadata
+        /// </summary>
+        /// <param name="points">The points from the meatadata</param>
+        /// <param name="color">Selected color</param>
+        private void DrawFromMeta(List<Point> points, string color)
+        {
+            SolidColorBrush activeColor = new SolidColorBrush((Color)ColorConverter.ConvertFromString(color));
 
+            // Draw all points
+            foreach (var pointMarker in points)
+            {
+                Ellipse marker = new Ellipse
+                {
+                    StrokeThickness = 3,
+                    Stroke = activeColor, // Creates hollow circle. Fill instead of Stroke for fill
+                    Margin = new Thickness(pointMarker.X - 10, pointMarker.Y - 10, 0, 0), // Minus half of width/height to place centered
+                    Width = 20,
+                    Height = 20
+                };
+                myCanvas.Children.Add(marker);
+            }
 
         }
 
