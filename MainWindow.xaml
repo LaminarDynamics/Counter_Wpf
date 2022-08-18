@@ -50,6 +50,7 @@
 
             <Button x:Name="saveBtn" Content="Save" HorizontalAlignment="Left" Height="24" Margin="24,10,0,0" VerticalAlignment="Top" Width="100" Click="save_Btn_Click"/>
             <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="49" Margin="14,39,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="138"/>
+            <CheckBox x:Name="checkBox" Content="Save With Overlay" HorizontalAlignment="Left" Margin="129,15,0,0" VerticalAlignment="Top" Foreground="White"/>
 
         </Grid>
         <Button x:Name="centerButton" Content="Re-Center" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="75" Click="centerButton_Click" FontSize="14"/>

@@ -4,6 +4,8 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Xml;
 using System.Xml.Serialization;
@@ -18,7 +20,7 @@ namespace Counter_Wpf
         /// <param name="fileName">User selected file name</param>
         /// <param name="allCatagories">List of all catagories</param>
         /// <param name="activeCatagories">The currently active catagory</param>
-        public void SavePhoto(string fileName, List<Catagories> allCatagories, string imageUrl)
+        public void SavePhoto(string fileName, List<Catagories> allCatagories, string imageUrl, Canvas myCanvas, bool saveOverlay)
         {
             // Get xml
             string xml = CreateXml(allCatagories);
@@ -26,6 +28,7 @@ namespace Counter_Wpf
             // Alter .exif
             var source = BitmapFrame.Create(new Uri(imageUrl));
             var metadata = (BitmapMetadata)source.Metadata;
+
 
             var daClone = source.Clone();   // Make clone so I can edit things
             var cloneMeta = metadata.Clone();   // Make clone of metadata
@@ -37,8 +40,28 @@ namespace Counter_Wpf
             // magick
             bmp.Unlock();
 
+
+            BmpBitmapEncoder encoder = new BmpBitmapEncoder();
+            if (saveOverlay)    // Save photo with points overlayed
+            {
+                // render InkCanvas' visual tree to the RenderTargetBitmap
+                double calculatedHeight = (source.Height / source.Width) * myCanvas.ActualWidth;
+                RenderTargetBitmap targetBitmap =
+                    new RenderTargetBitmap((int)myCanvas.ActualWidth,
+                                           (int)calculatedHeight,
+                                           96d, 96d,
+                                           PixelFormats.Default);
+                targetBitmap.Render(myCanvas);
+
+                // add the RenderTargetBitmap to a Bitmapencoder
+                
+                encoder.Frames.Add(BitmapFrame.Create(targetBitmap));
+            }
+
+
+
             var target = BitmapFrame.Create(bmp, null, cloneMeta, null); // here
-            var encoder = new JpegBitmapEncoder();
+            //var encoder = new JpegBitmapEncoder();
             encoder.Frames.Add(target);
             using (var stream = File.OpenWrite(fileName))
             {

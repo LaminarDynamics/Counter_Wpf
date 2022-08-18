@@ -121,6 +121,7 @@ namespace Counter_Wpf
                 canvas_dimensions.Y = image.Height;
 
 
+
                 // Check loaded image for embedded data
                 LoadMetadata(imagePath);
             }
@@ -225,7 +226,8 @@ namespace Counter_Wpf
             {
                 // Save 
                 string filename = dialog.FileName;
-                saveFile.SavePhoto(filename, listOfCatagoryObjects, imagePath);
+                bool saveOverlay = (checkBox.IsChecked == true); // Check if saving canvas overlay
+                saveFile.SavePhoto(filename, listOfCatagoryObjects, imagePath, myCanvas, saveOverlay);
             }
 
         }
@@ -323,7 +325,7 @@ namespace Counter_Wpf
                 {
                     currentCatagory.Active = true;
                 }
-
+                
                 else
                 {
                     currentCatagory.Active = false;
