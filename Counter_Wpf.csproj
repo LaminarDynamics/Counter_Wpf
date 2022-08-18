@@ -84,6 +84,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="OpenFile.cs" />
     <Compile Include="SaveFile.cs" />
     <Page Include="CatagoriesControl.xaml">
       <SubType>Designer</SubType>

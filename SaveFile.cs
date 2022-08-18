@@ -59,7 +59,7 @@ namespace Counter_Wpf
         /// <returns></returns>
         private string CreateXml(List<Catagories> allCatagories)
         {
-            string header = $"<objects count='{allCatagories.Count}'";
+            string header = $"<objects count='{allCatagories.Count}'>\n";
 
             // Add each object
             foreach (var catagory in allCatagories)

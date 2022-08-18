@@ -39,12 +39,18 @@ namespace Counter_Wpf
         public List<CatagoriesControl> listOfCatagoryControls = new List<CatagoriesControl>();  // List of Catagory Controls
 
         private SaveFile saveFile = new SaveFile();
+        private OpenFile openFile = new OpenFile();
 
 
         public MainWindow()
         {
             InitializeComponent();
 
+
+        }
+
+        public void OpenFileDialog()
+        {
             // Configure open file dialog box
             var dialog = new Microsoft.Win32.OpenFileDialog();
 
@@ -71,7 +77,15 @@ namespace Counter_Wpf
 
         private void Window_Loaded(object sender, RoutedEventArgs e)    // Manual scaling for dynamic sizing (Hopefully)
         {
-          
+            if (image.Source == null)    // Only open file dialog if no image selected. Otherwise opens everytime MainWindow is reloaded
+            {
+                OpenFileDialog();
+            }
+            PlaceComponents();
+        }
+
+        private void PlaceComponents()
+        {
             try
             {
                 image.Source = new BitmapImage(new Uri(imagePath));
@@ -107,16 +121,16 @@ namespace Counter_Wpf
 
                 canvas_dimensions.X = image.Width;
                 canvas_dimensions.Y = image.Height;
+
+
+                // Check loaded image for embedded data
+                CheckMetadata(imagePath);
             }
 
-
-
-            catch (Exception)
+            catch (Exception e)
             {
-                MessageBox.Show("There was an error loading the image.\nPlease try again.", "Error");
+                //MessageBox.Show("There was an error loading the image.\nPlease try again." + e, "Error");
             }
-
-
         }
 
         private void image_MouseWheel(object sender, MouseWheelEventArgs e) // Mousewheel Zoom
@@ -401,9 +415,56 @@ namespace Counter_Wpf
             return activeCatagory;
         }
 
+        /// <summary>
+        /// Check for proper metadata in image .exif to create catagory objects 
+        /// </summary>
+        /// <param name="imagePath">The file path to the current image</param>
+        private void CheckMetadata(string imagePath)
+        {
+            var source = BitmapFrame.Create(new Uri(imagePath));
+            var metadata = (BitmapMetadata)source.Metadata;
+
+            // Create Objects from metadata
+            listOfCatagoryObjects = openFile.CreateObjects(metadata);
+
+            foreach (var catagory in listOfCatagoryObjects)
+            {
+                // Build objects onscreen
+                CatagoriesControl catagoriesControl1 = new CatagoriesControl();
+                string userGivenName = catagory.Name;
+                SolidColorBrush userSelectedColor = new SolidColorBrush((Color)ColorConverter.ConvertFromString(catagory.Color));
+
+                catagoriesControl1.colorCircle.Fill = userSelectedColor;
+                catagoriesControl1.Background = userSelectedColor;
+                catagoriesControl1.Name = userGivenName.ToString();
+
+                catagories.Children.Add(catagoriesControl1);    // Add to scrolller
+
+                List<Point> locations = new List<Point>();
+                var currentObject = catagoriesControl1.CatagoryAdded(index_of_catagories, userGivenName, catagory.Count, catagory.Color, locations, true);
+
+                //listOfCatagoryObjects.Add(currentObject);   // Add to list of objects
+
+                catagoriesControl1.RestyleControl(currentObject);
+                index_of_catagories++;
 
 
+                SelectedCatagoryChange(catagoriesControl1.Name);    // Changes active object
+                catagoriesControl1.HighlightCatagory(catagoriesControl1.Name); // Changes active hightlighted component
 
+
+                // Add control to list
+                listOfCatagoryControls.Add(catagoriesControl1);
+            }
+
+
+        }
+
+        private void load_btn_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog();
+            PlaceComponents();
+        }
     }
 
 
